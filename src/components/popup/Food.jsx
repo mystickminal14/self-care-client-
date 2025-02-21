@@ -55,13 +55,13 @@ const FoodModal = ({ onClose }) => {
       <div className="bg-sign-up max-w-xl w-[90%] h-auto justify-start bg-white flex flex-col rounded-lg shadow-lg p-5">
         <div className="flex justify-center flex-col items-center p-4">
           <h1 className="text-blue-800 text-3xl font-bold w-full p-3 rounded-b-lg text-center">
-            Occasion Food Selection
+            Food Selection
           </h1>
-          <p className="text-xl text-center">What do you eat in a regular diet?</p>
+          <p className="text-xl text-center">What do you eat today ?</p>
         </div>
         <form className="p-2">
           <h1 className="text-black-800 text-2xl font-bold w-full p-3 rounded-b-lg text-start">
-            Select the foods you eat Occasion:
+            Select the foods you eat today:
           </h1>
           <div className="flex flex-wrap gap-2">
             {individualFoods.map((food, index) => (
@@ -74,9 +74,15 @@ const FoodModal = ({ onClose }) => {
             ))}
           </div>
 
-          <div className="flex justify-end">
+          <div className="flex gap-2 justify-end pt-2">
             <button className="bg-blue-800 text-white px-4 py-2 rounded-md" onClick={onClose}>
-              Save +
+              update
+            </button>
+            <button className="bg-blue-800 text-white px-4 py-2 rounded-md" onClick={onClose}>
+              Save as Previous
+            </button>
+            <button className="bg-red-800 text-white px-4 py-2 rounded-md" onClick={onClose}>
+              Cancel
             </button>
           </div>
         </form>

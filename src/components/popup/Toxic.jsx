@@ -35,7 +35,7 @@ const ToxicModal = ({ onClose }) => {
             Toxic Substance Selection
           </h1>
           <p className="text-xl text-center">
-            Do you consume any toxic substance ?
+            Do you consume any toxic substance today ?
           </p>
         </div>
         <form className="p-2">
@@ -53,9 +53,15 @@ const ToxicModal = ({ onClose }) => {
             ))}
           </div>
 
-          <div className="flex justify-end">
+          <div className="flex gap-2 justify-end p-2">
             <button className="bg-blue-800 text-white px-4 py-2 rounded-md" onClick={onClose}>
-              Save +
+              update
+            </button>
+            <button className="bg-blue-800 text-white px-4 py-2 rounded-md" onClick={onClose}>
+              Save as Previous
+            </button>
+            <button className="bg-red-800 text-white px-4 py-2 rounded-md" onClick={onClose}>
+              Cancel
             </button>
           </div>
         </form>
