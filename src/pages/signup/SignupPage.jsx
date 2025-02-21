@@ -44,16 +44,7 @@ const SignUpPage = () => {
               autoComplete="username"
               placeholder="Username"
             />
-            <label htmlFor="email">Email</label>
-            <input
-              id="email"
-              name="email"
-              className="w-full"
-              label="Email"
-              variant="outlined"
-              autoComplete="email"
-              placeholder="Email"
-            />
+           
             <label htmlFor="password">Password</label>
             <input
               id="password"

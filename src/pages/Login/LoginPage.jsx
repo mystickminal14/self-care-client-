@@ -18,13 +18,14 @@ const LoginPage = () => {
           className="flex flex-col p-3 gap-6 w-full"
 
         >
-          <label htmlFor="email">Email</label>
+          <label htmlFor="username">Username</label>
           <input
             id="outlined-basic"
             name="username"
             className="w-full"
-            label="Username or Email"
+            label="Username"
             variant="outlined"
+            placeholder='Username'
 
           />
           <div className="relative w-full">
@@ -33,7 +34,7 @@ const LoginPage = () => {
               id="outlined-password-input"
               label="Password"
               name="password"
-
+placeholder='Password'
               type={show ? "text" : "password"}
               className="w-full"
               autoComplete="current-password"
