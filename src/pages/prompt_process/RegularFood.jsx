@@ -44,7 +44,7 @@ const RegularFood = () => {
     "Popcorn with Butter",
   ];
 
- const { setRegular } = useContext(AppContext);
+  const { setRegular } = useContext(AppContext);
   const [selectedFoods, setSelectedFoods] = useState([]);
   const [isNormal, setIsNormal] = useState(false);
 
@@ -59,7 +59,7 @@ const RegularFood = () => {
     );
   };
 
-const navigate=useNavigate();
+  const navigate = useNavigate();
 
   const handleSubmit = async () => {
     console.log(selectedFoods);
@@ -71,7 +71,7 @@ const navigate=useNavigate();
     <div className="background flex justify-center text-black bg-slate-800 items-center h-full sm:h-screen">
       <div className="bg-sign-up max-w-xl w-[90%] h-auto justify-start bg-white flex flex-col rounded-lg shadow-lg p-5">
         <div className="flex justify-center flex-col items-center p-4">
-          <h1 className="text-blue-900 text-3xl font-bold w-full p-3 rounded-b-lg text-center">
+          <h1 className="text-blue-800 text-3xl font-bold w-full p-3 rounded-b-lg text-center">
             Regular Food Selection
           </h1>
           <p className="text-xl text-center">What do you eat in a regular diet?</p>
