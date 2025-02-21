@@ -1,12 +1,12 @@
 .healthy {
-    background-image: url('../../assets/left-main-bg.png');
+    background-image: url('../../assets/green.png');
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
 }
 
 .unhealthy {
-    background-image: url('../../assets/right-bg.png');
+    background-image: url('../../assets/desert.png');
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
@@ -33,7 +33,4 @@
 .tab-button.active {
     background-color: #4CAF50;
     color: white;
-}
-.cold{
-    background-color: black;
 }

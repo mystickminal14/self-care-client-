@@ -15,37 +15,42 @@ import cactus1 from '../../assets/bad plants/Final Cactus.png';
 import cactus2 from '../../assets/bad plants/Cactus Steam.png';
 
 import "./dash.css";
+import FoodModal from "../../components/popup/Food";
+import ToxicModal from "../../components/popup/Toxic";
 
 const Dashboard = () => {
-  const [isOpen, setIsOpen] = useState(false);
   const [activeTab, setActiveTab] = useState("healthy");
+  const [activeModal, setActiveModal] = useState(null); // Tracks which modal is open
+  const toggleModal = (modalName) => {
+    setActiveModal((prev) => (prev === modalName ? null : modalName));
+  };
 
-  const toggleModal = () => setIsOpen((prev) => !prev);
 
   const healthyPlants = [root, stem, shoot, one, one, two];
-  const unhealthyPlants = [root,cactus,cactus2, cactus1, ];
+  const unhealthyPlants = [root, cactus, cactus2, cactus1,];
 
   return (
     <>
-      {/* Sidebar */}
       <div className="fixed left-0 top-0 h-full flex flex-col gap-4 p-4 bg-transparent">
-        <SidebarButton icon={<FaLeaf />} />
-        <SidebarButton icon={<FaSmoking />} />
-        <SidebarButton icon={<FaHeart />} onClick={toggleModal} />
+        <SidebarButton icon={<FaLeaf />} onClick={() => toggleModal("food")} />
+        <SidebarButton icon={<FaSmoking />} onClick={() => toggleModal("toxic")} />
+        <SidebarButton icon={<FaHeart />} onClick={() => toggleModal("health")} />
         <SidebarButton icon={<FaSignOutAlt />} />
       </div>
 
-      {isOpen && <HealthModal onClose={toggleModal} />}
+      {activeModal === "health" && <HealthModal onClose={() => setActiveModal(null)} />}
+      {activeModal === "toxic" && <ToxicModal onClose={() => setActiveModal(null)} />}
+      {activeModal === "food" && <FoodModal onClose={() => setActiveModal(null)} />}
 
-      <div className="flex cold py-2 justify-center mt-4">
-        <button 
-          className={`tab-button ${activeTab === "healthy" ? "active" : ""}`} 
+      <div className="flex fixed left-20 cold py-2 justify-center mt-4 bg-transparent">
+        <button
+          className={`tab-button ${activeTab === "healthy" ? "active" : ""}`}
           onClick={() => setActiveTab("healthy")}
         >
           Healthy Plants
         </button>
-        <button 
-          className={`tab-button ${activeTab === "unhealthy" ? "active" : ""}`} 
+        <button
+          className={`tab-button ${activeTab === "unhealthy" ? "active" : ""}`}
           onClick={() => setActiveTab("unhealthy")}
         >
           Unhealthy Plants
@@ -56,15 +61,15 @@ const Dashboard = () => {
         <div className="flex justify-center gap-9 items-end p-9 h-screen">
           {activeTab === "healthy"
             ? healthyPlants.map((img, index) => (
-                <div key={index} className="plant">
-                  <img src={img} alt={`Healthy Plant ${index + 1}`} />
-                </div>
-              ))
+              <div key={index} className="plant">
+                <img src={img} alt={`Healthy Plant ${index + 1}`} />
+              </div>
+            ))
             : unhealthyPlants.map((img, index) => (
-                <div key={index} className="plant">
-                  <img src={img} alt={`Unhealthy Plant ${index + 1}`} />
-                </div>
-              ))}
+              <div key={index} className="plant">
+                <img src={img} alt={`Unhealthy Plant ${index + 1}`} />
+              </div>
+            ))}
         </div>
       </div>
     </>

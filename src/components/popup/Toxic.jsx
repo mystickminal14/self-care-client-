@@ -1,48 +1,25 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import BlockTitle from "../../components/button/block-title";
+import { AppContext } from "../../context/app.context";
 
-const FoodModal = ({ onClose }) => {
-  const individualFoods = [
-    "Rice",
-    "Lentils",
-    "Apple",
-    "Banana",
-    "Orange",
-    "Milk",
-    "Cheese",
-    "Almonds",
-    "Chicken",
-    "Fish",
-    "Eggs",
-    "Carrots",
-    "Broccoli",
-    "Tomato",
-    "Cucumber",
-    "Mango",
-    "Strawberries",
-    "Avocado",
-    "Coconut Water",
-    "Fresh Juice",
-    "Pizza",
-    "Burger",
-    "French Fries",
-    "Fried Chicken",
-    "Hot Dog",
-    "Ice Cream",
-    "Chocolate",
-    "Candy",
-    "Chips",
-    "Cup Noodles",
-    "Doughnuts",
-    "Pasta",
-    "Soft Drinks",
-    "Popcorn with Butter",
+const ToxicModal = ({ onClose }) => {
+  const { health, regular, occasional } = useContext(AppContext);
+  const toxicFoods = [
+    "Smoking",
+    "Alcohol",
+    "Cigarettes",
+    "Tobacco",
+    "Cocaine",
+    "Heroin",
+    "vape",
+    "hookah",
   ];
-
 
   const [selectedFoods, setSelectedFoods] = useState([]);
 
+
   const toggleSelection = (food) => {
+
     setSelectedFoods((prevSelected) =>
       prevSelected.includes(food)
         ? prevSelected.filter((item) => item !== food)
@@ -50,21 +27,24 @@ const FoodModal = ({ onClose }) => {
     );
   };
 
+
   return (
-    <div className=" fixed inset-0 flex justify-center items-center">
+    <div className="fixed inset-0 flex justify-center items-center">
       <div className="bg-sign-up max-w-xl w-[90%] h-auto justify-start bg-white flex flex-col rounded-lg shadow-lg p-5">
         <div className="flex justify-center flex-col items-center p-4">
           <h1 className="text-blue-800 text-3xl font-bold w-full p-3 rounded-b-lg text-center">
-            Occasion Food Selection
+            Toxic Substance Selection
           </h1>
-          <p className="text-xl text-center">What do you eat in a regular diet?</p>
+          <p className="text-xl text-center">
+            Do you consume any toxic substance ?
+          </p>
         </div>
         <form className="p-2">
           <h1 className="text-black-800 text-2xl font-bold w-full p-3 rounded-b-lg text-start">
-            Select the foods you eat Occasion:
+            If yes, Select the Toxic Substance:
           </h1>
           <div className="flex flex-wrap gap-2">
-            {individualFoods.map((food, index) => (
+            {toxicFoods.map((food, index) => (
               <BlockTitle
                 key={index}
                 title={food}
@@ -85,4 +65,4 @@ const FoodModal = ({ onClose }) => {
   );
 };
 
-export default FoodModal;
+export default ToxicModal;

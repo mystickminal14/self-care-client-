@@ -3,26 +3,15 @@ import { useState, useContext } from "react";
 
 const HealthModal = ({ onClose }) => {
   const diseases = [
-    "Diabetes",
-    "Hypertension (High Blood Pressure)",
-    "Heart Disease",
-    "Stroke",
-    "Asthma",
-    "Tuberculosis",
-    "Pneumonia",
-    "Hepatitis B",
-    "Liver Cirrhosis",
-    "Arthritis",
-    "Osteoporosis",
-    "Epilepsy",
-    "Lung Cancer",
-    "Breast Cancer",
-    "Leukemia",
+    "Diabetes", "Hypertension (High Blood Pressure)", "Heart Disease",
+    "Stroke", "Asthma", "Tuberculosis", "Pneumonia", "Hepatitis B",
+    "Liver Cirrhosis", "Arthritis", "Osteoporosis", "Epilepsy",
+    "Lung Cancer", "Breast Cancer", "Leukemia"
   ];
+
   const [selectedDiseases, setSelectedDiseases] = useState([]);
 
   const toggleSelection = (disease) => {
-
     setSelectedDiseases((prevSelected) =>
       prevSelected.includes(disease)
         ? prevSelected.filter((item) => item !== disease)
@@ -31,16 +20,15 @@ const HealthModal = ({ onClose }) => {
   };
 
   return (
-    <div className="bg-transparent flex justify-center text-black  items-center h-full sm:h-screen">
-      <div className="bg-sign-up max-w-xl w-[90%] h-auto justify-start bg-white flex flex-col gap-5 rounded-lg shadow-lg p-5">
+    <div className="fixed inset-0 flex justify-center items-center">
+      <div className="bg-white max-w-xl w-[90%] h-auto flex flex-col gap-5 rounded-lg shadow-lg p-5">
         <div className="flex justify-center flex-col items-center p-4">
           <h1 className="text-blue-800 text-3xl font-bold w-full p-3 rounded-b-lg text-center">
             Prompt Process
           </h1>
         </div>
         <form className="p-2">
-
-          <h1 className="text-black-800 text-2xl font-bold w-full p-3 rounded-b-lg text-start">
+          <h1 className="text-black text-2xl font-bold w-full p-3 rounded-b-lg text-start">
             If you have any disease, please select from the following options:
           </h1>
           <div className="flex flex-wrap gap-2">
@@ -61,7 +49,6 @@ const HealthModal = ({ onClose }) => {
         </form>
       </div>
     </div>
-
   );
 };
 
