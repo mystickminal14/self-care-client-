@@ -8,7 +8,6 @@ const RegularFood = () => {
   const individualFoods = [
     "Rice",
     "Lentils",
-    "Vegetables",
     "Apple",
     "Banana",
     "Orange",
@@ -22,7 +21,6 @@ const RegularFood = () => {
     "Broccoli",
     "Tomato",
     "Cucumber",
-
     "Mango",
     "Strawberries",
     "Avocado",
