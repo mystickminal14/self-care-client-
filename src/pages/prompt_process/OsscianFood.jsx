@@ -2,6 +2,7 @@ import React, { useContext, useState } from "react";
 import BlockTitle from "../../components/button/block-title";
 import Buttons from "../../components/button/button";
 import { AppContext } from "../../context/app.context";
+import { useNavigate } from "react-router-dom";
 
 const OsscianFood = () => {
    const { setOccasional } = useContext(AppContext);
@@ -63,10 +64,11 @@ const OsscianFood = () => {
     setIsNormal(true);
     setSelectedFoods(["Balanced Diet"]);
   };
-
+const navigate=useNavigate();
   const handleSubmit = async () => {
     console.log(selectedFoods);
     setOccasional(selectedFoods)
+    navigate('/toxic-food');
   };
 
   return (

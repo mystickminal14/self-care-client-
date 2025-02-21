@@ -4,7 +4,7 @@ import Buttons from "../../components/button/button";
 import { AppContext } from "../../context/app.context";
 
 const Toxic = () => {
-  const { setOccasional } = useContext(AppContext);
+  const { health,regular,occasional } = useContext(AppContext);
   const toxicFoods = [
     "Smoking",
     "Alcohol",
@@ -38,7 +38,12 @@ const Toxic = () => {
 
   const handleSubmit = async () => {
     console.log(selectedFoods);
-    setOccasional(selectedFoods)
+  console.log({
+    "regular":regular,
+    "occasional":occasional,
+    "health":health,
+    "toxic":selectedFoods
+  })
   };
 
   return (
