@@ -7,9 +7,9 @@ export default function Buttons({ title, onAdd }) {
     <button
       onClick={(e) => {
         e.preventDefault();
-      
+
         onAdd();
-       
+
       }}
       className='blue-button'
     >
