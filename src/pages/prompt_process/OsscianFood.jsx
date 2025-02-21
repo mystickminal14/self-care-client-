@@ -5,7 +5,7 @@ import { AppContext } from "../../context/app.context";
 import { useNavigate } from "react-router-dom";
 
 const OsscianFood = () => {
-   const { setOccasional } = useContext(AppContext);
+  const { setOccasional } = useContext(AppContext);
   const individualFoods = [
     "Rice",
     "Lentils",
@@ -64,7 +64,7 @@ const OsscianFood = () => {
     setIsNormal(true);
     setSelectedFoods(["Balanced Diet"]);
   };
-const navigate=useNavigate();
+  const navigate = useNavigate();
   const handleSubmit = async () => {
     console.log(selectedFoods);
     setOccasional(selectedFoods)
@@ -75,13 +75,13 @@ const navigate=useNavigate();
     <div className="background flex justify-center text-black bg-slate-800 items-center h-full sm:h-screen">
       <div className="bg-sign-up max-w-xl w-[90%] h-auto justify-start bg-white flex flex-col rounded-lg shadow-lg p-5">
         <div className="flex justify-center flex-col items-center p-4">
-          <h1 className="text-blue-900 text-3xl font-bold w-full p-3 rounded-b-lg text-center">
+          <h1 className="text-blue-800 text-3xl font-bold w-full p-3 rounded-b-lg text-center">
             Osscian Food Selection
           </h1>
           <p className="text-xl text-center">What do you eat in a regular diet?</p>
         </div>
         <form className="p-2">
-          <h1 className="text-black-900 text-2xl font-bold w-full p-3 rounded-b-lg text-start">
+          <h1 className="text-black-800 text-2xl font-bold w-full p-3 rounded-b-lg text-start">
             Select the foods you eat Osscian:
           </h1>
           <div className="flex flex-wrap gap-2">

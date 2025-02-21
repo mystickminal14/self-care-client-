@@ -19,7 +19,7 @@
   }
   
   .prompt.selected {
-    background-color: blue;
+    background-color: oklch(0.424 0.199 265.638);
     color: white;
   }
   

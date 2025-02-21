@@ -27,7 +27,8 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    background-color: #007bff; /* Blue */
+    background-color: oklch(0.424 0.199 265.638);
+ /* Blue */
     color: white;
     border: none;
     padding: 10px 15px;
@@ -40,7 +41,8 @@
   }
   
   .blue-button:hover {
-    background-color: #0056b3; /* Darker blue on hover */
+    background-color: oklch(0.424 0.199 265.638);
+ /* Darker blue on hover */
     transform: scale(1.05);
   }
   
