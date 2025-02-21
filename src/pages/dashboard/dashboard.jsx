@@ -30,7 +30,7 @@ const Dashboard = () => {
   };
   const { newData } = useGet('/garden');
   const healthyPlants = [root, stem, shoot, one, one, two];
-  const unhealthyPlants = [root, cactus, cactus2, cactus1];
+  const unhealthyPlants = [root, cactus,cactus, cactus2, cactus1];
 
   return (
     <>
