@@ -2,6 +2,7 @@ import React, { useContext, useState } from "react";
 import BlockTitle from "../../components/button/block-title";
 import Buttons from "../../components/button/button";
 import { AppContext } from "../../context/app.context";
+import { useNavigate } from "react-router-dom";
 
 const RegularFood = () => {
   const individualFoods = [
@@ -58,7 +59,7 @@ const RegularFood = () => {
     );
   };
 
-
+const navigate=useNavigate();
 
   const handleSubmit = async () => {
     console.log(selectedFoods);
