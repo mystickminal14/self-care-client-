@@ -72,7 +72,7 @@ const LoginPage = () => {
             Sign In
           </button>
           <Link
-            to="/sign-up"
+            to="/signup"
             style={{ marginTop: '-15px' }}
             className="text-blue-700 self-center hover:text-black transition-all mt-2"
           >
