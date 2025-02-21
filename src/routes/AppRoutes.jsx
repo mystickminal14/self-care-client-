@@ -16,7 +16,7 @@ const AppRoutes = () => {
       <Route path="/health" element={<Tabs />} />
       <Route path="/osscian-food" element={<OsscianFood />} />
       <Route path="/toxic-food" element={<Toxic />} />
-      <Route path="/dashboard" element={<Toxic />} />
+      <Route path="/dashboard" element={<Dashboard />} />
     </Routes >
   )
 }
