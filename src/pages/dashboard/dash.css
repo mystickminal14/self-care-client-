@@ -34,3 +34,9 @@
     background-color: #4CAF50;
     color: white;
 }
+.curs{
+    cursor: pointer;
+}
+button {
+    transition: all 0.3s ease;
+}
