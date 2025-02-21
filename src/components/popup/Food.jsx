@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import BlockTitle from "../../components/button/block-title";
+import usePut from "../../hooks/usePut";
 
 const FoodModal = ({ onClose }) => {
   const individualFoods = [
@@ -41,7 +42,15 @@ const FoodModal = ({ onClose }) => {
 
 
   const [selectedFoods, setSelectedFoods] = useState([]);
+  const { update } = usePut('/garden/update', {
+    'foodPrompt': selectedFoods
+  });
 
+  const handleSubmit = async (e) => {
+    e.preventDefault()
+    await update();
+    onClose();
+  }
   const toggleSelection = (food) => {
     setSelectedFoods((prevSelected) =>
       prevSelected.includes(food)
@@ -75,12 +84,10 @@ const FoodModal = ({ onClose }) => {
           </div>
 
           <div className="flex gap-2 justify-end pt-2">
-            <button className="bg-blue-800 text-white px-4 py-2 rounded-md" onClick={onClose}>
-              update
+            <button className="bg-blue-800 text-white px-4 py-2 rounded-md" onClick={handleSubmit}>
+              Update
             </button>
-            <button className="bg-blue-800 text-white px-4 py-2 rounded-md" onClick={onClose}>
-              Save as Previous
-            </button>
+
             <button className="bg-red-800 text-white px-4 py-2 rounded-md" onClick={onClose}>
               Cancel
             </button>

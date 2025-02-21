@@ -17,6 +17,7 @@ import cactus1 from "../../assets/bad plants/Final Cactus.png";
 import cactus2 from "../../assets/bad plants/Cactus Steam.png";
 
 import "./dash.css";
+import useGet from "../../hooks/useGet";
 
 const Dashboard = () => {
   const [activeTab, setActiveTab] = useState("healthy");
@@ -27,7 +28,7 @@ const Dashboard = () => {
     setActiveModal((prev) => (prev === modalName ? null : modalName));
     setActiveSidebar((prev) => (prev === modalName ? null : modalName));
   };
-
+  const { newData } = useGet('/garden');
   const healthyPlants = [root, stem, shoot, one, one, two];
   const unhealthyPlants = [root, cactus, cactus2, cactus1];
 
@@ -79,15 +80,15 @@ const Dashboard = () => {
         <div className="flex justify-center gap-9 items-end p-9 h-screen">
           {activeTab === "healthy"
             ? healthyPlants.map((img, index) => (
-                <div key={index} className="plant">
-                  <img src={img} alt={`Healthy Plant ${index + 1}`} />
-                </div>
-              ))
+              <div key={index} className="plant">
+                <img src={img} alt={`Healthy Plant ${index + 1}`} />
+              </div>
+            ))
             : unhealthyPlants.map((img, index) => (
-                <div key={index} className="plant">
-                  <img src={img} alt={`Unhealthy Plant ${index + 1}`} />
-                </div>
-              ))}
+              <div key={index} className="plant">
+                <img src={img} alt={`Unhealthy Plant ${index + 1}`} />
+              </div>
+            ))}
         </div>
       </div>
     </>
@@ -97,9 +98,8 @@ const Dashboard = () => {
 // Sidebar Button Component
 const SidebarButton = ({ icon, isActive, onClick }) => (
   <button
-    className={`flex curs items-center justify-center w-12 h-12 rounded-full shadow-md transition-all ${
-      isActive ? "bg-green-500 text-white" : "bg-white bg-opacity-30 hover:bg-opacity-50"
-    }`}
+    className={`flex curs items-center justify-center w-12 h-12 rounded-full shadow-md transition-all ${isActive ? "bg-green-500 text-white" : "bg-white bg-opacity-30 hover:bg-opacity-50"
+      }`}
     onClick={onClick}
   >
     {icon}

@@ -1,6 +1,7 @@
 import React, { useContext, useState } from "react";
 import BlockTitle from "../../components/button/block-title";
 import { AppContext } from "../../context/app.context";
+import usePut from "../../hooks/usePut";
 
 const ToxicModal = ({ onClose }) => {
   const toxicFoods = [
@@ -16,7 +17,15 @@ const ToxicModal = ({ onClose }) => {
 
   const [selectedFoods, setSelectedFoods] = useState([]);
 
+  const { update } = usePut('/garden/update', {
+    'toxicPrompt': selectedFoods
+  });
 
+  const handleSubmit = async (e) => {
+    e.preventDefault()
+    await update();
+    onClose();
+  }
   const toggleSelection = (food) => {
 
     setSelectedFoods((prevSelected) =>
@@ -54,12 +63,10 @@ const ToxicModal = ({ onClose }) => {
           </div>
 
           <div className="flex gap-2 justify-end p-2">
-            <button className="bg-blue-800 text-white px-4 py-2 rounded-md" onClick={onClose}>
-              update
+            <button className="bg-blue-800 text-white px-4 py-2 rounded-md" onClick={handleSubmit}>
+              Update
             </button>
-            <button className="bg-blue-800 text-white px-4 py-2 rounded-md" onClick={onClose}>
-              Save as Previous
-            </button>
+
             <button className="bg-red-800 text-white px-4 py-2 rounded-md" onClick={onClose}>
               Cancel
             </button>

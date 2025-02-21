@@ -1,3 +1,4 @@
+import usePut from "../../hooks/usePut";
 import BlockTitle from "../button/block-title";
 import { useState, useContext } from "react";
 
@@ -10,7 +11,24 @@ const HealthModal = ({ onClose }) => {
   ];
 
   const [selectedDiseases, setSelectedDiseases] = useState([]);
+  const { update } = usePut('/garden/update', {
+    'healthPrompt': selectedDiseases
+  });
 
+  const handleSubmit = async (e) => {
+    e.preventDefault()
+    await update();
+    onClose();
+  }
+  const { update: saveOnly } = usePut('/garden/update', {
+    'healthPrompt': ['Same']
+  });
+
+  const handleSaveasPerious = async (e) => {
+    e.preventDefault()
+    await saveOnly();
+    onClose();
+  }
   const toggleSelection = (disease) => {
     setSelectedDiseases((prevSelected) =>
       prevSelected.includes(disease)
@@ -42,10 +60,10 @@ const HealthModal = ({ onClose }) => {
             ))}
           </div>
           <div className="flex p-2 gap-2 justify-end">
-            <button className="bg-blue-800 text-white px-4 py-2 rounded-md" onClick={onClose}>
-              update
+            <button className="bg-blue-800 text-white px-4 py-2 rounded-md" onClick={handleSubmit}>
+              Update
             </button>
-            <button className="bg-blue-800 text-white px-4 py-2 rounded-md" onClick={onClose}>
+            <button className="bg-blue-800 text-white px-4 py-2 rounded-md" onClick={handleSaveasPerious}>
               Save as Previous
             </button>
             <button className="bg-red-800 text-white px-4 py-2 rounded-md" onClick={onClose}>
