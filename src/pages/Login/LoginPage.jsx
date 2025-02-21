@@ -1,86 +1,73 @@
-import React from 'react'
-import { useState } from 'react';
-import { Link } from 'react-router-dom';
+import React, { useState } from "react";
+import { Link } from "react-router-dom";
 import './login.css'
 import { FaEyeSlash, FaEye } from "react-icons/fa";
+
 const LoginPage = () => {
   const [show, setShow] = useState(false);
+
   return (
-    <div className="background flex justify-center text-black bg-slate-800 items-center h-screen">
-      <div className="bg-sign-in max-w-md w-[90%]  justify-start bg-white flex flex-col gap-5 rounded-lg shadow-lg p-5">
-        <div className="flex justify-center flex-col items-center p-4">
-          <h1 className="text-blue-900 text-3xl font-bold w-full p-3 rounded-b-lg text-center">
-            Sign In
-          </h1>
-          <p className="text-xl text-center">Sign in to stay connected</p>
+    <div className=" background flex justify-center items-center h-screen">
+      <div className="bg-white w-[90%] max-w-md rounded-lg shadow-lg p-6">
+        <div className="text-center">
+          <h1 className="text-3xl font-bold text-blue-800">Sign In</h1>
+          <p className="text-gray-600 mt-1">Sign in to stay connected</p>
         </div>
-        <form
-          className="flex flex-col p-3 gap-6 w-full"
-        >
-          <label htmlFor="username">Username</label>
-          <input
-            id="outlined-basic"
-            name="username"
-            className="w-full"
-            label="Username"
-            variant="outlined"
-            placeholder='Username'
 
-          />
-          <div className="relative w-full">
-            <label htmlFor="password">Password</label>
+        <form className="flex flex-col gap-4 mt-5">
+          <div>
+            <label htmlFor="username" className="text-gray-800 font-medium">
+              Username
+            </label>
             <input
-              id="outlined-password-input"
-              label="Password"
-              name="password"
-placeholder='Password'
-              type={show ? "text" : "password"}
-              className="w-full"
-              autoComplete="current-password"
+              id="username"
+              name="username"
+              type="text"
+              placeholder="Enter your username"
+              className="w-full p-3 mt-1 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-800"
             />
+          </div>
 
-            {show ? (
-              <FaEye
-                className="absolute top-1/2 right-3 transform -translate-y-1/2 cursor-pointer"
-                onClick={() => setShow(!show)}
+          <div>
+            <label htmlFor="password" className="text-gray-700 font-medium">
+              Password
+            </label>
+            <div className="relative">
+              <input
+                id="password"
+                name="password"
+                type={show ? "text" : "password"}
+                placeholder="Enter your password"
+                className="w-full p-3 mt-1 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-800"
               />
-            ) : (
-              <FaEyeSlash
-                className="absolute top-1/2 right-3 transform -translate-y-1/2 cursor-pointer"
+              <span
+                className="absolute top-1/2 right-4 transform -translate-y-1/2 cursor-pointer text-gray-800"
                 onClick={() => setShow(!show)}
-              />
-            )}
+              >
+                {show ? <FaEye /> : <FaEyeSlash />}
+              </span>
+            </div>
           </div>
-          <div className="flex justify-between items-center w-full mt-2">
-            <label
-              control={<input value="remember" color="primary" />}
-              label="Remember me"
-            />
-            <Link
-              to="#"
-              className="text-blue-700 hover:text-black transition-all"
-            >
-              Forget password?
-            </Link>
-          </div>
+
+          {/* Sign In Button */}
           <button
             type="submit"
-            className="w-full self-center md:w-28"
-            variant="contained"
+            className="w-full bg-blue-800 text-white py-3 rounded-lg hover:bg-blue-800 transition-all"
           >
             Sign In
           </button>
-          <Link
-            to="/signup"
-            style={{ marginTop: '-15px' }}
-            className="text-blue-700 self-center hover:text-black transition-all mt-2"
-          >
-            Don't have an account? Sign Up
-          </Link>
+
+          {/* Sign Up Link */}
+          <p className="text-center text-gray-800 mt-2">
+            Don't have an account?{" "}
+            <Link to="/signup" className="text-blue-800 hover:underline">
+              Sign Up
+            </Link>
+          </p>
         </form>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default LoginPage
+export default LoginPage;

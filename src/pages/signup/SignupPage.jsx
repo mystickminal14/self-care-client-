@@ -1,93 +1,107 @@
 import React, { useState } from "react";
-import "../Login/login.css";
 import { FaEyeSlash, FaEye } from "react-icons/fa";
 import { Link, useNavigate } from "react-router-dom";
-
+import '../Login/login.css'
 const SignUpPage = () => {
   const [show, setShow] = useState(false);
   const navigate = useNavigate();
   const [data, setData] = useState({
     fullName: "",
     username: "",
-    email: "",
     password: "",
   });
 
   const handleChange = (e) => {
-    const {name,value}=e.target;
+    const { name, value } = e.target;
     setData({ ...data, [name]: value });
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log("Submitted Data:", data);
-    navigate("/health"); 
+    navigate("/health");
   };
 
   return (
-    <div className="background flex justify-center text-black bg-slate-800 items-center h-full sm:h-screen">
-      <div className="bg-sign-up max-w-xl w-[90%] h-auto justify-start bg-white flex flex-col gap-5 rounded-lg shadow-lg p-5">
-        <div className="flex justify-center flex-col items-center p-4">
-          <h1 className="text-blue-900 text-3xl font-bold w-full p-3 rounded-b-lg text-center">
-            Sign Up
-          </h1>
-          <p className="text-xl text-center">Join now to organize your world</p>
+    <div className=" background flex justify-center items-center h-screen">
+      <div className="bg-white w-[90%] max-w-lg rounded-lg shadow-lg p-6">
+        <div className="text-center">
+          <h1 className="text-3xl font-bold text-blue-800">Sign Up</h1>
+          <p className="text-gray-600 mt-1">Join now to organize your world</p>
         </div>
-        <form className="space-y-4 p-2" onSubmit={handleSubmit}>
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-            <label htmlFor="fullName">Full Name</label>
+
+        <form className="space-y-4 mt-5" onSubmit={handleSubmit}>
+          {/* Full Name */}
+          <div>
+            <label htmlFor="fullName" className="text-gray-800 font-medium">
+              Full Name
+            </label>
             <input
               id="fullName"
               name="fullName"
-              className="w-full"
+              type="text"
               value={data.fullName}
               onChange={handleChange}
-              placeholder="Full Name"
+              placeholder="Enter your full name"
+              className="w-full p-3 mt-1 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-800"
             />
+          </div>
 
-            <label htmlFor="username">Username</label>
+          {/* Username */}
+          <div>
+            <label htmlFor="username" className="text-gray-700 font-medium">
+              Username
+            </label>
             <input
               id="username"
               name="username"
-              className="w-full"
+              type="text"
               value={data.username}
               onChange={handleChange}
-              placeholder="Username"
+              placeholder="Choose a username"
+              className="w-full p-3 mt-1 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-800"
             />
+          </div>
 
-            <label htmlFor="password">Password</label>
-            <div className="relative w-full">
+          {/* Password */}
+          <div>
+            <label htmlFor="password" className="text-gray-800 font-medium">
+              Password
+            </label>
+            <div className="relative">
               <input
                 id="password"
                 name="password"
                 type={show ? "text" : "password"}
-                className="w-full"
                 value={data.password}
                 onChange={handleChange}
-                placeholder="Password"
+                placeholder="Create a password"
+                className="w-full p-3 mt-1 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-800"
               />
-              <div
-                className="absolute right-3 top-2 cursor-pointer"
+              <span
+                className="absolute top-1/2 right-4 transform -translate-y-1/2 cursor-pointer text-gray-800"
                 onClick={() => setShow(!show)}
               >
                 {show ? <FaEye /> : <FaEyeSlash />}
-              </div>
+              </span>
             </div>
           </div>
 
-          <div className="flex flex-col gap-4">
-            <button
-              type="submit"
-              className="w-full self-center md:w-28 bg-blue-500 text-white py-2 rounded-lg"
-            >
-              Sign Up
-            </button>
-            <div className="text-center">
-              <Link to="/" className="text-blue-500">
-                Already have an account? Sign In
-              </Link>
-            </div>
-          </div>
+          {/* Submit Button */}
+          <button
+            type="submit"
+            className="w-full bg-blue-800 text-white py-3 rounded-lg hover:bg-blue-800 transition-all"
+          >
+            Sign Up
+          </button>
+
+          {/* Sign In Link */}
+          <p className="text-center text-gray-600 mt-2">
+            Already have an account?{" "}
+            <Link to="/" className="text-blue-800 hover:underline">
+              Sign In
+            </Link>
+          </p>
         </form>
       </div>
     </div>
