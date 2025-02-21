@@ -16,7 +16,6 @@ const LoginPage = () => {
         </div>
         <form
           className="flex flex-col p-3 gap-6 w-full"
-
         >
           <label htmlFor="username">Username</label>
           <input
@@ -68,7 +67,6 @@ placeholder='Password'
             type="submit"
             className="w-full self-center md:w-28"
             variant="contained"
-
           >
             Sign In
           </button>
