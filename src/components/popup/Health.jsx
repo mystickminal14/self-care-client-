@@ -21,10 +21,10 @@ const HealthModal = ({ onClose }) => {
 
   return (
     <div className="fixed inset-0 flex justify-center items-center">
-      <div className="bg-white max-w-xl w-[90%] h-auto flex flex-col gap-5 rounded-lg shadow-lg p-5">
-        <div className="flex justify-center flex-col items-center p-4">
+      <div className="bg-white max-w-xl w-[90%] h-auto flex flex-col rounded-lg shadow-lg p-5">
+        <div className="flex justify-center flex-col items-center">
           <h1 className="text-blue-800 text-3xl font-bold w-full p-3 rounded-b-lg text-center">
-            Prompt Process
+            Any Health issues
           </h1>
         </div>
         <form className="p-2">
@@ -41,9 +41,15 @@ const HealthModal = ({ onClose }) => {
               />
             ))}
           </div>
-          <div className="flex justify-end">
+          <div className="flex p-2 gap-2 justify-end">
             <button className="bg-blue-800 text-white px-4 py-2 rounded-md" onClick={onClose}>
-              Save +
+              update
+            </button>
+            <button className="bg-blue-800 text-white px-4 py-2 rounded-md" onClick={onClose}>
+              Save as Previous
+            </button>
+            <button className="bg-red-800 text-white px-4 py-2 rounded-md" onClick={onClose}>
+              Cancel
             </button>
           </div>
         </form>
