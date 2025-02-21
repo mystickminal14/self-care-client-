@@ -16,7 +16,7 @@ const SignUpPage = () => {
     const { name, value } = e.target;
     setData({ ...data, [name]: value });
   };
-  const { save } = usePost("/auth/register",data);
+  const { save } = usePost("/users/register",data);
   const handleSubmit = async(e) => {
     e.preventDefault();
    
