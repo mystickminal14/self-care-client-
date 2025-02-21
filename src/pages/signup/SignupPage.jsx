@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { FaEyeSlash, FaEye } from "react-icons/fa";
 import { Link, useNavigate } from "react-router-dom";
 import '../Login/login.css'
+import usePost from './../../hooks/usePost';
 const SignUpPage = () => {
   const [show, setShow] = useState(false);
   const navigate = useNavigate();
@@ -15,10 +16,11 @@ const SignUpPage = () => {
     const { name, value } = e.target;
     setData({ ...data, [name]: value });
   };
-
-  const handleSubmit = (e) => {
+  const { save } = usePost("/auth/register",data);
+  const handleSubmit = async(e) => {
     e.preventDefault();
-    console.log("Submitted Data:", data);
+   
+    await save();
     navigate("/health");
   };
 
