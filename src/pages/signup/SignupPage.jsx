@@ -1,8 +1,9 @@
 import React, { useState } from "react";
 import { FaEyeSlash, FaEye } from "react-icons/fa";
 import { Link, useNavigate } from "react-router-dom";
-import '../Login/login.css'
-import usePost from './../../hooks/usePost';
+import "../Login/login.css";
+import usePost from "./../../hooks/usePost";
+import Swal from "sweetalert2";
 const SignUpPage = () => {
   const [show, setShow] = useState(false);
   const navigate = useNavigate();
@@ -16,12 +17,43 @@ const SignUpPage = () => {
     const { name, value } = e.target;
     setData({ ...data, [name]: value });
   };
-  const { save } = usePost("/users/register",data);
-  const handleSubmit = async(e) => {
+  const { save } = usePost("/users/register", data);
+  const handleSubmit = async (e) => {
     e.preventDefault();
-   
-    await save();
-    navigate("/health");
+    if (data["fullName"].split(" ").length < 2) {
+      Swal.fire({
+               position: "center",
+               icon: "error",
+               title: "Input Validation Error!",
+               text: "Please enter your full name!!",
+               showConfirmButton: true,
+             });
+             return
+    }
+    if (data.username.length < 5) {
+      Swal.fire({
+        position: "center",
+        icon: "error",
+        title: "Input Validation Error!",
+        text: "Username must be greater than 5 letters!!",
+        showConfirmButton: true,
+      });
+      return
+    }
+    if (data.password.length < 8) {
+      Swal.fire({
+        position: "center",
+        icon: "error",
+        title: "Input Validation Error!",
+        text: "Password must be atleast 8 character!!",
+        showConfirmButton: true,
+      });
+      return
+    }
+    const check = await save();
+    if (check) {
+      navigate("/health");
+    }
   };
 
   return (
