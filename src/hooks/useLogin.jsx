@@ -2,7 +2,7 @@ import axios from "../api/BaseApi";
 import React, { useContext } from "react";
 import { AppContext } from '../context/app.context';
 
-const useLogin = (url) => {
+const useLogin = (url,body) => {
   const {data, setData,isLoading,showToast,setIsLoading} = useContext(AppContext);
   const loginUser = async () => {
     setIsLoading(true)
@@ -11,9 +11,11 @@ const useLogin = (url) => {
       showToast("Login Successfull!!");
       setIsLoading(false)
       setData(response.data)
+      return true;
     } catch (e) {
       console.log("$e");
       setIsLoading(false)
+      return false;
     }
   };
 

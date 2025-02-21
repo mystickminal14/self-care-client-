@@ -4,6 +4,7 @@ import { Link, useNavigate } from "react-router-dom";
 import "../Login/login.css";
 import usePost from "./../../hooks/usePost";
 import Swal from "sweetalert2";
+import useLogin from "../../hooks/useLogin";
 const SignUpPage = () => {
   const [show, setShow] = useState(false);
   const navigate = useNavigate();
@@ -17,7 +18,11 @@ const SignUpPage = () => {
     const { name, value } = e.target;
     setData({ ...data, [name]: value });
   };
-  const { save } = usePost("/users/register", data);
+  const { save ,data:value } = usePost("/users/register", data);
+  const { loginUser } = useLogin("/auth/login",{
+    'username':data['username'],
+    'password':data['password'],
+  } );
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (data["fullName"].split(" ").length < 2) {
@@ -35,7 +40,7 @@ const SignUpPage = () => {
         position: "center",
         icon: "error",
         title: "Input Validation Error!",
-        text: "Username must be greater than 5 letters!!",
+        text: "Username must be greater than 5 letters      bbbh!!",
         showConfirmButton: true,
       });
       return
@@ -51,8 +56,12 @@ const SignUpPage = () => {
       return
     }
     const check = await save();
+
     if (check) {
-      navigate("/health");
+      const checked = await loginUser();
+      if(checked){
+        navigate('/health')
+      }
     }
   };
 
