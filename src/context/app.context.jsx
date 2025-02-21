@@ -1,5 +1,5 @@
 import { createContext, useState } from "react";
-import { ToastContainer } from "react-toastify";
+import { ToastContainer, toast } from "react-toastify";
 export const AppContext = createContext();
 const ToastOptions = {
   position: "bottom-right",

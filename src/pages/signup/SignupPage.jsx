@@ -13,6 +13,7 @@ const SignUpPage = () => {
 
   };
 
+
   return (
     <div className="background flex justify-center text-black bg-slate-800 items-center h-full sm:h-screen">
       <div className="bg-sign-up max-w-xl w-[90%] h-auto justify-start bg-white flex flex-col gap-5 rounded-lg shadow-lg p-5">
@@ -44,7 +45,7 @@ const SignUpPage = () => {
               autoComplete="username"
               placeholder="Username"
             />
-           
+
             <label htmlFor="password">Password</label>
             <input
               id="password"
@@ -66,17 +67,13 @@ const SignUpPage = () => {
                 ),
               }}
             />
-
           </div>
-
 
           <div className="flex flex-col gap-4">
             <button
-              type="submit"
               className="w-full self-center md:w-28"
-              variant="contained"
-              color="primary"
               style={{ marginTop: "10px" }}
+              onClick={() => navigate("/food")} // ✅ Corrected
             >
               Sign Up
             </button>

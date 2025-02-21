@@ -1,21 +1,21 @@
 import React from 'react'
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
-import './login.css'
+import '../Login/login.css'
 import { FaEyeSlash, FaEye } from "react-icons/fa";
-const LoginPage = () => {
+const Food = () => {
   const [show, setShow] = useState(false);
   return (
     <div className="background flex justify-center text-black bg-slate-800 items-center h-screen">
       <div className="bg-sign-in max-w-md w-[90%]  justify-start bg-white flex flex-col gap-5 rounded-lg shadow-lg p-5">
-        <div className="flex justify-center flex-col items-center p-4">
+        <div className="flex justify-kcenter flex-col items-center p-4">
           <h1 className="text-blue-900 text-3xl font-bold w-full p-3 rounded-b-lg text-center">
-            Sign In
+            Prompt Process
           </h1>
-          <p className="text-xl text-center">Sign in to stay connected</p>
         </div>
         <form
           className="flex flex-col p-3 gap-6 w-full"
+
         >
           <label htmlFor="username">Username</label>
           <input
@@ -31,9 +31,9 @@ const LoginPage = () => {
             <label htmlFor="password">Password</label>
             <input
               id="outlined-password-input"
-              label="Password"
+              label="password"
               name="password"
-placeholder='Password'
+              placeholder='password'
               type={show ? "text" : "password"}
               className="w-full"
               autoComplete="current-password"
@@ -64,7 +64,6 @@ placeholder='Password'
             </Link>
           </div>
           <button
-            type="submit"
             className="w-full self-center md:w-28"
             variant="contained"
           >
@@ -83,4 +82,4 @@ placeholder='Password'
   )
 }
 
-export default LoginPage
+export default Food
