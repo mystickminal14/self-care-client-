@@ -1,10 +1,5 @@
 import React from "react";
-import root from '../../assets/plants/1.png'
-import stem from '../../assets/plants/2.png'
-import three from '../../assets/plants/3.png'
-import four from '../../assets/plants/4.png'
-import five from '../../assets/plants/5.png'
-import six from '../../assets/plants/6.png'
+
 
 import "./dash.css";
 import { FaLeaf, FaSmoking, FaHeart, FaSignOutAlt } from "react-icons/fa";
@@ -28,7 +23,7 @@ const Dashboard = () => {
       {isOpen && <HealthModal onClose={toggleModal} />}
 
       <div className="flex imageOne justify-center gap-9 items-end p-9 h-screen">
-        <div className="plant">
+        {/* <div className="plant">
           <img src={root} alt="" />
         </div>
         <div className="plant">
@@ -46,7 +41,7 @@ const Dashboard = () => {
         </div>
         <div className="plant">
           <img src={six} alt="" />
-        </div>
+        </div> */}
       </div>
 
 

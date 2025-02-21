@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import "./login.css";
 import { FaEyeSlash, FaEye } from "react-icons/fa";
 import useLogin from "../../hooks/useLogin";
@@ -20,11 +20,15 @@ const LoginPage = () => {
     const { name, value } = e.target;
     setData({ ...data, [name]: value });
   };
-
+const navigate=useNavigate()
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log("Form Data Submitted:", data);
-    loginUser();
+   const check= loginUser();
+   if(check){
+    navigate('/dashboard')
+   }
+
   };
 
   return (
