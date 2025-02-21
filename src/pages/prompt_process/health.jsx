@@ -47,8 +47,7 @@ const navigate=useNavigate();
     setSelectedDiseases(['normal']);
   };
   const handleSubmit = async () => {
-    console.log(selectedDiseases);
-    setHealth(setHealth);
+    setHealth(selectedDiseases);
     navigate('/regular-food');
   };
   return (
