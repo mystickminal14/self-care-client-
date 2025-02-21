@@ -1,6 +1,7 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import BlockTitle from "../../components/button/block-title";
 import Buttons from "../../components/button/button";
+import { AppContext } from "../../context/app.context";
 
 const Tabs = () => {
   const diseases = [
@@ -28,7 +29,7 @@ const Tabs = () => {
 
   const [selectedDiseases, setSelectedDiseases] = useState([]);
   const [isNormal, setIsNormal] = useState(false);
-
+  const { setHealth } = useContext(AppContext);
   const toggleSelection = (disease) => {
     if (isNormal) {
       setIsNormal(false);
@@ -46,6 +47,7 @@ const Tabs = () => {
   };
   const handleSubmit = async () => {
     console.log(selectedDiseases);
+    setHealth(setHealth);
   };
   return (
     <div className="background flex justify-center text-black bg-slate-800 items-center h-full sm:h-screen">
