@@ -3,12 +3,13 @@ import React, { useContext } from "react";
 import { AppContext } from '../context/app.context';
 
 const useLogin = (url) => {
-  const {data, setData,isLoading,setIsLoading} = useContext(AppContext);
+  const {data, setData,isLoading,showToast,setIsLoading} = useContext(AppContext);
   const loginUser = async () => {
-    setIsLoading(false)
+    setIsLoading(true)
     try {
       const response =await axios.post(url, body);
-      setIsLoading(transformWithEsbuild)
+      showToast("Login Successfull!!");
+      setIsLoading(false)
       setData(response.data)
     } catch (e) {
       console.log("$e");

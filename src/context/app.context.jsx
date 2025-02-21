@@ -1,15 +1,45 @@
 import { createContext, useState } from "react";
 
 export const AppContext = createContext();
+const ToastOptions = {
+  position: "bottom-right",
+  autoClose: 5000,
+  hideProgressBar: false,
+  closeOnClick: true,
+  pauseOnHover: true,
+  draggable: true,
+  progress: undefined,
+  theme: "colored",
+};
+export default function ContextApp({ children }) {
+  const [isLoading, setIsLoading] = useState();
+  const [data, setData] = useState();
 
-export default function ContextApp({ children }) 
-{
-  const [isLoading,setIsLoading]=useState();
-  const [data,setData]=useState();
-    return (
-      <AppContext.Provider value={{data,setData,setIsLoading,isLoading}}>
-        {children}
-      </AppContext.Provider>
-    );
-  }
-  
+ 
+  const showToast = (message, type = "default") => {
+    switch (type) {
+      case "warn":
+        toast.warn(message, ToastOptions);
+        break;
+      case "success":
+        toast.success(message, ToastOptions);
+        break;
+      case "error":
+        toast.error(message, ToastOptions);
+        break;
+      case "info":
+        toast.info(message, ToastOptions);
+        break;
+      default:
+        toast(message, ToastOptions);
+        break;
+    }
+  };
+
+  return (
+    <AppContext.Provider value={{ data, setData,showToast, setIsLoading, isLoading }}>
+      <ToastContainer />
+      {children}
+    </AppContext.Provider>
+  );
+}

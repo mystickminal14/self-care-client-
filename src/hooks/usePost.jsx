@@ -8,7 +8,8 @@ const usePost = (url, body) => {
     setIsLoading(true);
     try {
       const response = await axios.post(url, body);
-      console.log("Registration successfull");
+      console.log("Data saved successfull");
+      showToast("showToast")
       setIsLoading(false);
     } catch (error) {
       setIsLoading(false);
