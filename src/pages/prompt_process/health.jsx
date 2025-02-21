@@ -26,25 +26,32 @@ const Tabs = () => {
   const [selectedDiseases, setSelectedDiseases] = useState([]);
   const [isNormal, setIsNormal] = useState(false);
   const { setHealth } = useContext(AppContext);
+  const navigate = useNavigate();
+
   const toggleSelection = (disease) => {
     if (isNormal) {
       setIsNormal(false);
+      setSelectedDiseases([disease]); 
+    } else {
+      setSelectedDiseases((prevSelected) =>
+        prevSelected.includes(disease)
+          ? prevSelected.filter((item) => item !== disease)
+          : [...prevSelected, disease]
+      );
     }
-    setSelectedDiseases((prevSelected) =>
-      prevSelected.includes(disease)
-        ? prevSelected.filter((item) => item !== disease)
-        : [...prevSelected, disease]
-    );
   };
-  const navigate = useNavigate();
+
   const handleNormalSelection = () => {
     setIsNormal(true);
-    setSelectedDiseases(['normal']);
+    setSelectedDiseases(['Normal']);
   };
+
   const handleSubmit = async () => {
-    setHealth(selectedDiseases);
+    setHealth(isNormal ? ["normal"] : selectedDiseases);
+    console.log(selectedDiseases)
     navigate('/regular-food');
   };
+
   return (
     <div className="background flex justify-center text-black bg-slate-800 items-center h-full sm:h-screen">
       <div className="bg-sign-up max-w-xl w-[90%] h-auto justify-start bg-white flex flex-col gap-5 rounded-lg shadow-lg p-5">

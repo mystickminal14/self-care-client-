@@ -76,7 +76,7 @@ const OsscianFood = () => {
       <div className="bg-sign-up max-w-xl w-[90%] h-auto justify-start bg-white flex flex-col rounded-lg shadow-lg p-5">
         <div className="flex justify-center flex-col items-center p-4">
           <h1 className="text-blue-800 text-3xl font-bold w-full p-3 rounded-b-lg text-center">
-            Osscian Food Selection
+            Ocassion Food Selection
           </h1>
           <p className="text-xl text-center">What do you eat in a regular diet?</p>
         </div>

@@ -6,6 +6,7 @@ import RegularFood from "../pages/prompt_process/RegularFood";
 import Tabs from '../pages/prompt_process/health';
 import OsscianFood from "../pages/prompt_process/OsscianFood";
 import Toxic from "../pages/prompt_process/Toxic";
+import Dashboard from "../pages/dashboard/dashboard";
 const AppRoutes = () => {
   return (
     <Routes>
@@ -16,9 +17,6 @@ const AppRoutes = () => {
       <Route path="/osscian-food" element={<OsscianFood />} />
       <Route path="/toxic-food" element={<Toxic />} />
       <Route path="/dashboard" element={<Toxic />} />
-
-
-
     </Routes >
   )
 }
