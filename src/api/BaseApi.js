@@ -2,9 +2,9 @@ import axios from 'axios';
 export default axios.create(
     {
       baseURL: `http://192.168.20.197:8080/api/`, 
-      withCredential:true,
+      withCredentials:true,
       headers:{
-        'accept':'application/json',
+        'Accept':'application/json',
         'Content-Type':'application/json'
       }
     }
