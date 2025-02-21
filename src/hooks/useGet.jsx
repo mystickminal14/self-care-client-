@@ -1,8 +1,8 @@
-import React from "react";
+import React, { useEffect } from "react";
 import axios from "../api/BaseApi";
 const useGet = (url) => {
   const { setData, isLoading, setIsLoading } = useContext(AppContext);
-  const getData = useCallback(async () => {
+  const handleData = useCallback(async () => {
     setIsLoading(true);
     try {
       const response = await axios.get(url);
@@ -12,8 +12,11 @@ const useGet = (url) => {
       console.log(error);
       setIsLoading(false);
     }
-  }, [url,setIsLoading]);
-  return {data,isLoading};
+  }, [url, setIsLoading]);
+  useEffect(() => {
+    handleData();
+  }, [url]);
+  return { data, isLoading, handleData };
 };
 
 export default useGet;
