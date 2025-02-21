@@ -3,7 +3,6 @@ import BlockTitle from "../../components/button/block-title";
 import { AppContext } from "../../context/app.context";
 
 const ToxicModal = ({ onClose }) => {
-  const { health, regular, occasional } = useContext(AppContext);
   const toxicFoods = [
     "Smoking",
     "Alcohol",
