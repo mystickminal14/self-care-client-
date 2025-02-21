@@ -1,0 +1,25 @@
+.prompt {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 40px;
+    padding: 5px 10px;
+    border: 2px solid black;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
+    background-color: white;
+    color: black;
+    font-size: 16px;
+    white-space: nowrap;
+  }
+  
+  .prompt:hover {
+    background-color: lightgray;
+  }
+  
+  .prompt.selected {
+    background-color: blue;
+    color: white;
+  }
+  
