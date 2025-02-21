@@ -1,5 +1,5 @@
 import { createContext, useState } from "react";
-
+import { ToastContainer } from "react-toastify";
 export const AppContext = createContext();
 const ToastOptions = {
   position: "bottom-right",
@@ -15,7 +15,7 @@ export default function ContextApp({ children }) {
   const [isLoading, setIsLoading] = useState();
   const [data, setData] = useState();
 
- 
+
   const showToast = (message, type = "default") => {
     switch (type) {
       case "warn":
@@ -37,7 +37,7 @@ export default function ContextApp({ children }) {
   };
 
   return (
-    <AppContext.Provider value={{ data, setData,showToast, setIsLoading, isLoading }}>
+    <AppContext.Provider value={{ data, setData, showToast, setIsLoading, isLoading }}>
       <ToastContainer />
       {children}
     </AppContext.Provider>
