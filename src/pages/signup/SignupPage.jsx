@@ -5,13 +5,15 @@ import { Link, useNavigate } from "react-router-dom";
 const SignUpPage = () => {
   const [show, setShow] = useState(false);
   const navigate = useNavigate()
-  const data = {
-    fullName: '',
-    username: "",
-    email: "",
-    password: "",
-
-  };
+  const [data,setData] =useState(
+    {
+      fullName: '',
+      username: "",
+      email: "",
+      password: "",
+  
+    }
+  );
 
 
   return (
@@ -73,7 +75,9 @@ const SignUpPage = () => {
             <button
               className="w-full self-center md:w-28"
               style={{ marginTop: "10px" }}
-              onClick={() => navigate("/food")} // ✅ Corrected
+              onClick={() =>{
+                navigate("/health")
+              }} // ✅ Corrected
             >
               Sign Up
             </button>

@@ -2,6 +2,7 @@ import React, { useContext, useState } from "react";
 import BlockTitle from "../../components/button/block-title";
 import Buttons from "../../components/button/button";
 import { AppContext } from "../../context/app.context";
+import { useNavigate } from "react-router-dom";
 
 const Tabs = () => {
   const diseases = [
@@ -40,7 +41,7 @@ const Tabs = () => {
         : [...prevSelected, disease]
     );
   };
-
+const navigate=useNavigate();
   const handleNormalSelection = () => {
     setIsNormal(true);
     setSelectedDiseases(['normal']);
@@ -48,6 +49,7 @@ const Tabs = () => {
   const handleSubmit = async () => {
     console.log(selectedDiseases);
     setHealth(setHealth);
+    navigate('/regular-food');
   };
   return (
     <div className="background flex justify-center text-black bg-slate-800 items-center h-full sm:h-screen">

@@ -2,9 +2,9 @@ import { Routes, Route } from "react-router-dom";
 import React from 'react'
 import LoginPage from "../pages/Login/LoginPage";
 import SignupPage from "../pages/signup/SignupPage";
-import RegularFood from "../pages/prompt/RegularFood";
+import RegularFood from "../pages/prompt_process/RegularFood";
 import Tabs from '../pages/prompt_process/health';
-import OsscianFood from "../pages/prompt/OsscianFood";
+import OsscianFood from "../pages/prompt_process/OsscianFood";
 const AppRoutes = () => {
   return (
     <Routes>
