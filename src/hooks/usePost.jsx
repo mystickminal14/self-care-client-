@@ -1,21 +1,25 @@
+import { useContext, useState } from "react";
 import axios from "../api/BaseApi";
-import React, { useCallback } from "react";
+import { AppContext } from "../context/AppContext"; 
 
 const usePost = (url, body) => {
-  const { isLoading, setIsLoading } = useContext(AppContext);
+  const { setIsLoading } = useContext(AppContext); 
+  const [isLoading, setLocalLoading] = useState(false);
 
   const save = async () => {
     setIsLoading(true);
+    setLocalLoading(true);
     try {
       const response = await axios.post(url, body);
-      console.log("Data saved successfull");
-      showToast("showToast")
+      console.log("Data saved successfully", response.data);
       setIsLoading(false);
+      setLocalLoading(false);
     } catch (error) {
+      console.error("Error saving data:", error);
       setIsLoading(false);
-      console.log(error);
+      setLocalLoading(false);
     }
-  }
+  };
 
   return { save, isLoading };
 };

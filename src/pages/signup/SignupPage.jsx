@@ -2,19 +2,27 @@ import React, { useState } from "react";
 import "../Login/login.css";
 import { FaEyeSlash, FaEye } from "react-icons/fa";
 import { Link, useNavigate } from "react-router-dom";
+
 const SignUpPage = () => {
   const [show, setShow] = useState(false);
-  const navigate = useNavigate()
-  const [data,setData] =useState(
-    {
-      fullName: '',
-      username: "",
-      email: "",
-      password: "",
-  
-    }
-  );
+  const navigate = useNavigate();
+  const [data, setData] = useState({
+    fullName: "",
+    username: "",
+    email: "",
+    password: "",
+  });
 
+  const handleChange = (e) => {
+    const {name,value}=e.target;
+    setData({ ...data, [name]: value });
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    console.log("Submitted Data:", data);
+    navigate("/health"); 
+  };
 
   return (
     <div className="background flex justify-center text-black bg-slate-800 items-center h-full sm:h-screen">
@@ -25,59 +33,52 @@ const SignUpPage = () => {
           </h1>
           <p className="text-xl text-center">Join now to organize your world</p>
         </div>
-        <form className="space-y-4 p-2">
+        <form className="space-y-4 p-2" onSubmit={handleSubmit}>
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <label htmlFor="fullName">Full Name</label>
             <input
               id="fullName"
               name="fullName"
               className="w-full"
-              label="Full Name"
-              autoComplete="fullName"
-              placeholder="'Full Name"
-
+              value={data.fullName}
+              onChange={handleChange}
+              placeholder="Full Name"
             />
+
             <label htmlFor="username">Username</label>
             <input
               id="username"
               name="username"
               className="w-full"
-              label="Username"
-              variant="outlined"
-              autoComplete="username"
+              value={data.username}
+              onChange={handleChange}
               placeholder="Username"
             />
 
             <label htmlFor="password">Password</label>
-            <input
-              id="password"
-              name="password"
-              type={show ? "text" : "password"}
-              className="w-full"
-              label="Password"
-              variant="outlined"
-              placeholder="Password"
-              autoComplete="current-password"
-              InputProps={{
-                endAdornment: (
-                  <div
-                    onClick={() => setShow(!show)}
-                    className="cursor-pointer"
-                  >
-                    {show ? <FaEye /> : <FaEyeSlash />}
-                  </div>
-                ),
-              }}
-            />
+            <div className="relative w-full">
+              <input
+                id="password"
+                name="password"
+                type={show ? "text" : "password"}
+                className="w-full"
+                value={data.password}
+                onChange={handleChange}
+                placeholder="Password"
+              />
+              <div
+                className="absolute right-3 top-2 cursor-pointer"
+                onClick={() => setShow(!show)}
+              >
+                {show ? <FaEye /> : <FaEyeSlash />}
+              </div>
+            </div>
           </div>
 
           <div className="flex flex-col gap-4">
             <button
-              className="w-full self-center md:w-28"
-              style={{ marginTop: "10px" }}
-              onClick={() =>{
-                navigate("/health")
-              }} // ✅ Corrected
+              type="submit"
+              className="w-full self-center md:w-28 bg-blue-500 text-white py-2 rounded-lg"
             >
               Sign Up
             </button>
