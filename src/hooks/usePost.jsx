@@ -12,7 +12,6 @@ const [data,setData]=useState();
     setIsLoading(true);
     try {
       const response = await axios.post(url, body);
-      console.log("Data saved successfully", response.data);
       setData(response.data)
       showToast("Data Saved Successfully!!")
       setIsLoading(false);
