@@ -2,6 +2,8 @@ import React, { useContext, useState } from "react";
 import BlockTitle from "../../components/button/block-title";
 import Buttons from "../../components/button/button";
 import { AppContext } from "../../context/app.context";
+import usePost from "./../../hooks/usePost";
+import { useNavigate } from "react-router-dom";
 
 const Toxic = () => {
   const { health, regular, occasional } = useContext(AppContext);
@@ -12,10 +14,10 @@ const Toxic = () => {
     "Tobacco",
     "Cocaine",
     "Heroin",
-    'vape',
-    'hookah'
-  ]
-
+    "vape",
+    "hookah",
+  ];
+  const navigate = useNavigate();
 
   const [selectedFoods, setSelectedFoods] = useState([]);
   const [isNormal, setIsNormal] = useState(false);
@@ -35,15 +37,20 @@ const Toxic = () => {
     setIsNormal(true);
     setSelectedFoods(["Balanced Diet"]);
   };
-
+  const { save, data: value } = usePost("/garden/initiate", {
+    regular: regular,
+    occasional: occasional,
+    healthPrompt: health,
+    toxicPrompt: selectedFoods,
+  });
   const handleSubmit = async () => {
+
     console.log(selectedFoods);
-    console.log({
-      "regular": regular,
-      "occasional": occasional,
-      "health": health,
-      "toxic": selectedFoods
-    })
+    const check = await save();
+
+    if (check) {
+      navigate("/dashboard");
+    }
   };
 
   return (
@@ -53,7 +60,9 @@ const Toxic = () => {
           <h1 className="text-blue-800 text-3xl font-bold w-full p-3 rounded-b-lg text-center">
             Toxic Substance Selection
           </h1>
-          <p className="text-xl text-center">Do you consume any toxic substance ?</p>
+          <p className="text-xl text-center">
+            Do you consume any toxic substance ?
+          </p>
         </div>
         <form className="p-2">
           <h1 className="text-black-800 text-2xl font-bold w-full p-3 rounded-b-lg text-start">
