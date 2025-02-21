@@ -1,0 +1,21 @@
+.imageOne {
+    background-image: url('../../assets/left-main-bg.png');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+  }
+  
+  .imageTwo {
+    background-image:  url('../../assets/right-bg.png');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+  }
+  .plant{
+    width:200px;
+height: 200px;
+display:flex;
+align-items: end;
+   
+  }
+  
