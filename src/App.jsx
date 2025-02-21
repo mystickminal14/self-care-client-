@@ -1,14 +1,10 @@
-
-import './App.css'
+import "./App.css";
 
 function App() {
-  const [count, setCount] = useState(0)
-
-  return (
-    <>
-      
-    </>
-  )
+  return <>
+  <h1>
+    Minal ia life
+    </h1></>;
 }
 
-export default App
+export default App;
