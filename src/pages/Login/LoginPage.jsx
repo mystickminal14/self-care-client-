@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
+import './login.css'
 import { FaEyeSlash, FaEye } from "react-icons/fa";
 
 const LoginPage = () => {
@@ -14,9 +15,8 @@ const LoginPage = () => {
         </div>
 
         <form className="flex flex-col gap-4 mt-5">
-          {/* Username */}
           <div>
-            <label htmlFor="username" className="text-gray-700 font-medium">
+            <label htmlFor="username" className="text-gray-800 font-medium">
               Username
             </label>
             <input
@@ -24,11 +24,10 @@ const LoginPage = () => {
               name="username"
               type="text"
               placeholder="Enter your username"
-              className="w-full p-3 mt-1 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className="w-full p-3 mt-1 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-800"
             />
           </div>
 
-          {/* Password */}
           <div>
             <label htmlFor="password" className="text-gray-700 font-medium">
               Password
@@ -39,10 +38,10 @@ const LoginPage = () => {
                 name="password"
                 type={show ? "text" : "password"}
                 placeholder="Enter your password"
-                className="w-full p-3 mt-1 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                className="w-full p-3 mt-1 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-800"
               />
               <span
-                className="absolute top-1/2 right-4 transform -translate-y-1/2 cursor-pointer text-gray-500"
+                className="absolute top-1/2 right-4 transform -translate-y-1/2 cursor-pointer text-gray-800"
                 onClick={() => setShow(!show)}
               >
                 {show ? <FaEye /> : <FaEyeSlash />}
@@ -50,29 +49,18 @@ const LoginPage = () => {
             </div>
           </div>
 
-          {/* Remember Me & Forgot Password */}
-          <div className="flex justify-between items-center text-sm">
-            <label className="flex items-center gap-2 text-gray-600">
-              <input type="checkbox" className="accent-blue-500" />
-              Remember me
-            </label>
-            <Link to="#" className="text-blue-600 hover:underline">
-              Forgot password?
-            </Link>
-          </div>
-
           {/* Sign In Button */}
           <button
             type="submit"
-            className="w-full bg-blue-600 text-white py-3 rounded-lg hover:bg-blue-700 transition-all"
+            className="w-full bg-blue-800 text-white py-3 rounded-lg hover:bg-blue-800 transition-all"
           >
             Sign In
           </button>
 
           {/* Sign Up Link */}
-          <p className="text-center text-gray-600 mt-2">
+          <p className="text-center text-gray-800 mt-2">
             Don't have an account?{" "}
-            <Link to="/signup" className="text-blue-600 hover:underline">
+            <Link to="/signup" className="text-blue-800 hover:underline">
               Sign Up
             </Link>
           </p>
