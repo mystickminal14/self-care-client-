@@ -1,10 +1,9 @@
-import "./App.css";
+import AppRoutes from "./routes/AppRoutes";
 
 function App() {
   return <>
-  <h1>
-    Minal ia life
-    </h1></>;
+    <AppRoutes />
+  </>;
 }
 
 export default App;
