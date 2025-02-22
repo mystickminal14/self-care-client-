@@ -227,7 +227,6 @@ const Dashboard = () => {
     }
     return root;
   };
-  const unhealthyPlants = [root, cactusShoot, growth, cactusSteam, cactus1];
   const handleLogout = async () => {
     const check = await handleDelete();
     if (check) {
@@ -269,7 +268,7 @@ const Dashboard = () => {
         <FoodModal onClose={() => toggleModal(null)} />
       )}
 
-      {/* Tab Buttons */}
+    
       <div className="flex fixed left-20 py-2 justify-center mt-4 bg-transparent">
         <button
           className={`tab-button ${activeTab === "healthy" ? "active" : ""}`}
@@ -297,7 +296,7 @@ const Dashboard = () => {
                   src={checkUnhealthy(plantData.plant, plantData.age)}
                   alt={`Unhealthy Plant ${index + 1}`}
                 />
-                <h1>{plantData.plant}</h1>
+                <h1>{plantData.prompt}</h1>
               </div>
             ))
             : goodPlants.map((plantData, index) => (
@@ -307,7 +306,7 @@ const Dashboard = () => {
                   alt={`Healthy Plant ${index + 1}`}
 
                 />
-                <h1>{plantData.plant}</h1>
+                <h1>{plantData.prompt}</h1>
               </div>
             ))}
         </div>
