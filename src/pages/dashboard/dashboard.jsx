@@ -361,7 +361,7 @@ const Dashboard = () => {
         <Tooltip id="guide-tooltip" variant="success" />
         <a
           data-tooltip-id="logout-tooltip"
-          data-tooltip-content="Food Safety"
+          data-tooltip-content="Logout"
           data-tooltip-place="right"
         >
           <SidebarButton onClick={handleLogout} icon={<FaSignOutAlt />} />
