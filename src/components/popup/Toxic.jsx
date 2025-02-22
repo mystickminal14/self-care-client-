@@ -2,6 +2,7 @@ import React, { useContext, useState } from "react";
 import BlockTitle from "../../components/button/block-title";
 import { AppContext } from "../../context/app.context";
 import usePut from "../../hooks/usePut";
+import ClockLoader from "react-spinners/ClockLoader";
 
 const ToxicModal = ({ onClose }) => {
   const toxicFoods = [
@@ -20,12 +21,24 @@ const ToxicModal = ({ onClose }) => {
   const { update } = usePut('/garden/update', {
     'toxicPrompt': selectedFoods
   });
+  const [loading, setLoading] = useState(false);
 
+  let [color, setColor] = useState("#ffffff");
   const handleSubmit = async (e) => {
-    e.preventDefault()
-    await update();
-    onClose();
+    e.preventDefault();
+    setLoading(true);
+    try {
+      await update();
+      onClose();
+    } finally {
+      setLoading(false);
+    }
   }
+  const override = {
+    display: "block",
+    margin: "0 auto",
+    borderColor: "red",
+  };
   const toggleSelection = (food) => {
 
     setSelectedFoods((prevSelected) =>
@@ -37,7 +50,7 @@ const ToxicModal = ({ onClose }) => {
 
 
   return (
-    <div className="fixed inset-0 flex justify-center items-center">
+    <><div className="fixed inset-0 flex justify-center items-center">
       <div className="bg-sign-up max-w-xl w-[90%] h-auto justify-start bg-white flex flex-col rounded-lg shadow-lg p-5">
         <div className="flex justify-center flex-col items-center p-4">
           <h1 className="text-blue-800 text-3xl font-bold w-full p-3 rounded-b-lg text-center">
@@ -57,14 +70,17 @@ const ToxicModal = ({ onClose }) => {
                 key={index}
                 title={food}
                 isSelected={selectedFoods.includes(food)}
-                onClick={() => toggleSelection(food)}
-              />
+                onClick={() => toggleSelection(food)} />
             ))}
           </div>
 
           <div className="flex gap-2 justify-end p-2">
-            <button className="bg-blue-800 cursor-pointer text-white px-4 py-2 rounded-md" onClick={handleSubmit}>
-              Update
+            <button
+              className="bg-blue-800 text-white px-4 py-2 rounded-md flex items-center"
+              onClick={handleSubmit}
+              disabled={loading}
+            >
+              {loading ? "Updating..." : "Update"}
             </button>
 
             <button className="bg-red-800 cursor-pointer text-white px-4 py-2 rounded-md" onClick={onClose}>
@@ -73,7 +89,15 @@ const ToxicModal = ({ onClose }) => {
           </div>
         </form>
       </div>
+
     </div>
+      <ClockLoader
+        color={color}
+        loading={loading}
+        cssOverride={override}
+        size={150}
+        aria-label="Loading Spinner"
+        data-testid="loader" /></>
   );
 };
 

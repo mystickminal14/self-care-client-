@@ -1,3 +1,5 @@
+import ClockLoader from "react-spinners/ClockLoader";
+import { AppContext } from "../../context/app.context";
 import usePut from "../../hooks/usePut";
 import BlockTitle from "../button/block-title";
 import { useState, useContext } from "react";
@@ -14,21 +16,41 @@ const HealthModal = ({ onClose }) => {
   const { update } = usePut('/garden/update', {
     'healthPrompt': selectedDiseases
   });
-
+  const override = {
+    display: "block",
+    margin: "0 auto",
+    borderColor: "red",
+  };
+  const [loading, setLoading] = useState(false);
   const handleSubmit = async (e) => {
-    e.preventDefault()
-    await update();
-    onClose();
-  }
+    e.preventDefault();
+    setLoading(true);
+    try {
+      await update();
+      onClose();
+    } finally {
+      setLoading(false);
+    }
+  };
   const { update: saveOnly } = usePut('/garden/update', {
     'healthPrompt': ['Same']
   });
+  const { isLoading } = useContext(AppContext);
+  let [color, setColor] = useState("#ffffff");
 
   const handleSaveasPerious = async (e) => {
     e.preventDefault()
+    setLoading(true);
+
     await saveOnly();
-    onClose();
+    try {
+      await saveOnly();
+      onClose();
+    } finally {
+      setLoading(false);
+    }
   }
+
   const toggleSelection = (disease) => {
     setSelectedDiseases((prevSelected) =>
       prevSelected.includes(disease)
@@ -38,7 +60,7 @@ const HealthModal = ({ onClose }) => {
   };
 
   return (
-    <div className="fixed inset-0 flex justify-center items-center">
+    <><div className="fixed inset-0 flex justify-center items-center">
       <div className="bg-white max-w-xl w-[90%] h-auto flex flex-col rounded-lg shadow-lg p-5">
         <div className="flex justify-center flex-col items-center">
           <h1 className="text-blue-800 text-3xl font-bold w-full p-3 rounded-b-lg text-center">
@@ -55,14 +77,18 @@ const HealthModal = ({ onClose }) => {
                 key={index}
                 title={disease}
                 isSelected={selectedDiseases.includes(disease)}
-                onClick={() => toggleSelection(disease)}
-              />
+                onClick={() => toggleSelection(disease)} />
             ))}
           </div>
           <div className="flex p-2 gap-2 justify-end">
-            <button className="bg-blue-800  cursor-pointer text-white px-4 py-2 rounded-md" onClick={handleSubmit}>
-              Update
+            <button
+              className="bg-blue-800 text-white px-4 py-2 rounded-md flex items-center"
+              onClick={handleSubmit}
+              disabled={loading}
+            >
+              {loading ? "Updating..." : "Update"}
             </button>
+
             <button className="bg-blue-800 cursor-pointer text-white px-4 py-2 rounded-md" onClick={handleSaveasPerious}>
               Save as Previous
             </button>
@@ -72,7 +98,16 @@ const HealthModal = ({ onClose }) => {
           </div>
         </form>
       </div>
-    </div>
+
+    </div><ClockLoader
+        color={color}
+        loading={loading}
+        cssOverride={override}
+        size={150}
+        aria-label="Loading Spinner"
+        data-testid="loader" />
+    </>
+
   );
 };
 
