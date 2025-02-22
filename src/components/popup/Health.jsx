@@ -46,7 +46,7 @@ const { setModelHealth,toggleModal } = useContext(AppContext);
   };
 
   return (
-    <><div className="fixed inset-0 flex justify-center items-center">
+    <><div className="fixed inset-0 flex justify-center items-center z-50">
       <div className="bg-white max-w-xl w-[90%] h-auto flex flex-col rounded-lg shadow-lg p-5">
         <div className="flex justify-center flex-col items-center">
           <h1 className="text-blue-800 text-3xl font-bold w-full p-3 rounded-b-lg text-center">

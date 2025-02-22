@@ -413,7 +413,8 @@ const Dashboard = () => {
                 />
                 <h1>{plantData.prompt}</h1>
               </div>
-            ))
+            )
+          )
             : goodPlants.map((plantData, index) => {
               const healthPercentage = (plantData.health / 10) * 100; // Health to percentage
               return (

@@ -13,7 +13,7 @@ const GuideModal = ({ onClose }) => {
 
   return (
     <>
-      <div className="fixed inset-0 flex justify-center items-center">
+      <div className="fixed inset-0 flex justify-center items-center z-50">
         <div className="bg-sign-up max-w-xl w-[90%] h-auto justify-start bg-white flex flex-col rounded-lg shadow-lg p-3">
           <div className="flex justify-center flex-col items-center p-4">
             <h1 className="text-blue-800 text-3xl font-bold w-full p-3 rounded-b-lg text-center">
