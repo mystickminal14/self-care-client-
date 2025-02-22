@@ -1,3 +1,5 @@
+import ClockLoader from "react-spinners/ClockLoader";
+import { AppContext } from "../../context/app.context";
 import usePut from "../../hooks/usePut";
 import BlockTitle from "../button/block-title";
 import { useState, useContext } from "react";
@@ -14,7 +16,11 @@ const HealthModal = ({ onClose }) => {
   const { update } = usePut('/garden/update', {
     'healthPrompt': selectedDiseases
   });
-
+  const override = {
+    display: "block",
+    margin: "0 auto",
+    borderColor: "red",
+  };
   const handleSubmit = async (e) => {
     e.preventDefault()
     await update();
@@ -23,12 +29,17 @@ const HealthModal = ({ onClose }) => {
   const { update: saveOnly } = usePut('/garden/update', {
     'healthPrompt': ['Same']
   });
+  const { isLoading } = useContext(AppContext);
+  let [color, setColor] = useState("#ffffff");
 
   const handleSaveasPerious = async (e) => {
     e.preventDefault()
     await saveOnly();
-    onClose();
+    if (!isLoading) {
+      onClose();
+    }
   }
+
   const toggleSelection = (disease) => {
     setSelectedDiseases((prevSelected) =>
       prevSelected.includes(disease)
@@ -38,7 +49,7 @@ const HealthModal = ({ onClose }) => {
   };
 
   return (
-    <div className="fixed inset-0 flex justify-center items-center">
+    <><div className="fixed inset-0 flex justify-center items-center">
       <div className="bg-white max-w-xl w-[90%] h-auto flex flex-col rounded-lg shadow-lg p-5">
         <div className="flex justify-center flex-col items-center">
           <h1 className="text-blue-800 text-3xl font-bold w-full p-3 rounded-b-lg text-center">
@@ -55,8 +66,7 @@ const HealthModal = ({ onClose }) => {
                 key={index}
                 title={disease}
                 isSelected={selectedDiseases.includes(disease)}
-                onClick={() => toggleSelection(disease)}
-              />
+                onClick={() => toggleSelection(disease)} />
             ))}
           </div>
           <div className="flex p-2 gap-2 justify-end">
@@ -72,7 +82,16 @@ const HealthModal = ({ onClose }) => {
           </div>
         </form>
       </div>
-    </div>
+
+    </div><ClockLoader
+        color={color}
+        loading={isLoading}
+        cssOverride={override}
+        size={150}
+        aria-label="Loading Spinner"
+        data-testid="loader" />
+    </>
+
   );
 };
 
