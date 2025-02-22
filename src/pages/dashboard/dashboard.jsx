@@ -289,10 +289,10 @@ const Dashboard = () => {
     return root;
   };
 
-  const checkUnhealthy = (plant, age) => {
+  const checkUnhealthy = (plant,health, age) => {
     if (unHealthy[plant]) {
-      console.log(unHealthy[plant][age])
-      return unHealthy[plant][age] || root;
+      console.log(unHealthy[plant][health])
+      return unHealthy[plant][health] || root;
     }
     return root;
   };
