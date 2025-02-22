@@ -128,7 +128,7 @@ const Dashboard = () => {
       6: stem,
       7: redBud,
       8: redBud,
-    9: red,
+      9: red,
       10: red,
     },
     G5: {
@@ -163,7 +163,7 @@ const Dashboard = () => {
       3: RedWithered,
       4: RedWithering,
       5: RedWithering,
-     
+
     },
 
     G2: {
@@ -282,7 +282,7 @@ const Dashboard = () => {
     if (healthy[plant]) {
       if (health > 5) {
         return healthy[plant][age] || root;
-     
+
       }
       return healthAndAge[plant][health] || root;
     }
@@ -400,30 +400,68 @@ const Dashboard = () => {
       </div>
 
       <div
-        className={`tab-content ${
-          activeTab === "healthy" ? "healthy" : "unhealthy"
-        }`}
+        className={`tab-content ${activeTab === "healthy" ? "healthy" : "unhealthy"
+          }`}
       >
         <div className="flex justify-center gap-9 items-end p-9 h-screen">
           {activeTab === "unhealthy"
             ? badPlants.map((plantData, index) => (
-                <div key={index} className="plant">
+              <div key={index} className="plant">
+                <img
+                  src={checkUnhealthy(plantData.plant, plantData.age)}
+                  alt={`Unhealthy Plant ${index + 1}`}
+                />
+                <h1>{plantData.prompt}</h1>
+              </div>
+            ))
+            : goodPlants.map((plantData, index) => {
+              const healthPercentage = (plantData.health / 10) * 100; // Health to percentage
+              return (
+                <div key={index} className="plant relative">
+                  <div className="w-56 bg-white pt-9 pb-5 pl-4 pr-4 absolute -top-20">
+                    <div className="relative w-full mb-2">
+                      <div className="absolute -top-8 " >{plantData.prompt}</div>
+                      <div
+                        className="absolute top-0 left-0 w-full h-2 rounded"
+                        style={{
+                          width: `${healthPercentage}%`,
+                          backgroundColor: "green", // Health progress bar color
+                        }}
+                      ></div>
+
+                      <span
+                        className="absolute top-0 left-2/3 transform -translate-x-1/2 text-black text-xs font-semibold"
+                        style={{ top: '-20px' }} // Adjust position of percentage text
+                      >
+                        {Math.round(healthPercentage)}%
+                      </span>
+                    </div>
+                  </div>
+                  {/* <div className="relative w-full mb-2">
+                    <div
+                      className="absolute top-0 left-0 w-full h-2 rounded"
+                      style={{
+                        width: `${healthPercentage}%`,
+                        backgroundColor: "green", // Health progress bar color
+                      }}
+                    ></div>
+
+                    <span
+                      className="absolute top-0 left-1/2 transform -translate-x-1/2 text-white text-xs font-semibold"
+                      style={{ top: '-20px' }} // Adjust position of percentage text
+                    >
+                      {Math.round(healthPercentage)}%
+                    </span>
+                  </div> */}
+
                   <img
-                    src={checkUnhealthy(plantData.plant, plantData.age)}
-                    alt={`Unhealthy Plant ${index + 1}`}
-                  />
-                  <h1>{plantData.prompt}</h1>
-                </div>
-              ))
-            : goodPlants.map((plantData, index) => (
-                <div key={index} className="plant">
-                  <img
-                    src={checkValue(plantData.plant,plantData.health, plantData.age)}
+                    src={checkValue(plantData.plant, plantData.health, plantData.age)}
                     alt={`Healthy Plant ${index + 1}`}
                   />
-                  <h1>{plantData.prompt}</h1>
+
                 </div>
-              ))}
+              )
+            })}
         </div>
       </div>
     </>
@@ -433,11 +471,10 @@ const Dashboard = () => {
 // Sidebar Button Component
 const SidebarButton = ({ icon, isActive, onClick }) => (
   <button
-    className={`flex curs items-center justify-center w-12 h-12 rounded-full shadow-md transition-all ${
-      isActive
-        ? "bg-green-500 text-white"
-        : "bg-white bg-opacity-30 hover:bg-opacity-50"
-    }`}
+    className={`flex curs items-center justify-center w-12 h-12 rounded-full shadow-md transition-all ${isActive
+      ? "bg-green-500 text-white"
+      : "bg-white bg-opacity-30 hover:bg-opacity-50"
+      }`}
     onClick={onClick}
   >
     {icon}
