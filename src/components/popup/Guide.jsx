@@ -14,7 +14,7 @@ const GuideModal = ({ onClose }) => {
   return (
     <>
       <div className="fixed inset-0 flex justify-center items-center">
-        <div className="bg-sign-up max-w-xl w-[90%] h-auto justify-start bg-white flex flex-col rounded-lg shadow-lg p-5">
+        <div className="bg-sign-up max-w-xl w-[90%] h-auto justify-start bg-white flex flex-col rounded-lg shadow-lg p-3">
           <div className="flex justify-center flex-col items-center p-4">
             <h1 className="text-blue-800 text-3xl font-bold w-full p-3 rounded-b-lg text-center">
               Guideline
@@ -41,13 +41,6 @@ const GuideModal = ({ onClose }) => {
                 <li>If the user has no major disease or only mild conditions → One plant in the healthy area & one in the unhealthy area.</li>
                 <li>If the user is completely healthy → Two plants in the healthy area.</li>
                 <li>If the user is unhealthy (with serious health conditions) → Two plants in the unhealthy area.</li>
-              </ol>
-            </div>
-
-            <h1 className="text-xl font-semibold p-2">Toxic Consumption (e.g., smoking, tobacco, hookah, etc.):</h1>
-            <div>
-              <ol className="list-decimal pl-6 text-lg">
-                <li>If the user consumes any toxic substances → Two plants in the unhealthy area.</li>
               </ol>
             </div>
 
