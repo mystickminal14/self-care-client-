@@ -8,7 +8,7 @@ const usePlant = (url) => {
     setIsLoading(true);
     try {
       const response = await axios.get(url);
-      PiTrainThin(refresh,response)
+      console.log(refresh,response)
       const goodPlant = response?.data.filter(
         (value) => value["plantType"] === "Good"
       );
