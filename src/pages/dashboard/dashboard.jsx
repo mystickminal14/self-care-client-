@@ -1,7 +1,7 @@
 import React, { useContext, useState } from "react";
 import {
-  FaLeaf,
-  FaSmoking,
+  FaAppleAlt,
+  FaSkullCrossbones,
   FaHeart,
   FaSignOutAlt,
   FaGuilded,
@@ -11,6 +11,7 @@ import FoodModal from "../../components/popup/Food";
 import ToxicModal from "../../components/popup/Toxic";
 import { Tooltip } from "react-tooltip";
 import "react-tooltip/dist/react-tooltip.css";
+import { CircularProgressbar } from 'react-circular-progressbar';
 // Healthy plants
 import root from "../../assets/goodPlant/Seed.png";
 import shoot from "../../assets/goodPlant/Shoot.png";
@@ -65,6 +66,8 @@ import { useNavigate } from "react-router-dom";
 import { AppContext } from "../../context/app.context";
 import usePlant from "../../hooks/usePlant";
 import GuideModal from "../../components/popup/Guide";
+import { FaHeartPulse } from "react-icons/fa6";
+import { green } from "@mui/material/colors";
 
 const Dashboard = () => {
   const [activeTab, setActiveTab] = useState("healthy");
@@ -335,7 +338,7 @@ const Dashboard = () => {
           data-tooltip-place="right"
         >
           <SidebarButton
-            icon={<FaLeaf />}
+            icon={<FaAppleAlt />}
             isActive={activeSidebar === "food"}
             onClick={() => toggleModal("food")}
           />
@@ -347,7 +350,7 @@ const Dashboard = () => {
           data-tooltip-place="right"
         >
           <SidebarButton
-            icon={<FaSmoking />}
+            icon={<FaSkullCrossbones />}
             isActive={activeSidebar === "toxic"}
             onClick={() => toggleModal("toxic")}
           />
@@ -423,78 +426,70 @@ const Dashboard = () => {
           }`}
       >
         <div className="flex justify-center gap-9 items-end p-9 h-screen">
-          {activeTab === "unhealthy"
-            ? badPlants.map((plantData, index) => {
+          {activeTab === "unhealthy" ? badPlants.map((plantData, index) => (
+            <div key={index} className="plant">
+              <img
+                src={checkUnhealthy(plantData.plant, plantData.age)}
+                alt={`Unhealthy Plant ${index + 1}`}
+              />
+              <h1>{plantData.prompt}</h1>
+            </div>
+          )) : goodPlants.map((plantData, index) => {
+            const healthPercentage = (plantData.health / 10) * 100; // Convert health to percentage
+            return (
+              <div key={index} className="plant relative">
+                <img
+                  src={checkValue(plantData.plant, plantData.health, plantData.age)}
+                  alt={`Healthy Plant ${index + 1}`}
+                  className="absolute -top-6"
+                />
+                <div className="w-52 bg-transparent absolute top-40 -left-2">
+                  <div className="relative w-full mb-2 group"> {/* Added 'group' here */}
+                    <div style={{ width: "50px", height: "50px", margin: "0 auto" }} className="relative bg-white rounded-full">
 
-              const healthPercentage = (plantData.health / 10) * 100; // Health to percentage
-              return (
-                <div key={index} className="plant relative">
-                  <div className="w-52 bg-white pt-9 pb-5 pl- pr-4 absolute -top-20">
-                    <div className="relative w-full mb-2">
-                      <div className="absolute -top-8 left-6">{plantData.prompt}</div>
-                      <div className="absolute top-2 left-6 text-1xl">{life(plantData.age)}</div>
+                      {/* Icon with hover trigger */}
+                      <div className="absolute top-4 left-4 cursor-pointer">
+                        {plantData.prompt === 'Health' ? <FaHeart /> : plantData.prompt === 'Toxic' ? <FaSkullCrossbones /> : <FaAppleAlt />}
+                      </div>
 
-                      <div
-                        className="absolute top-0 left-3 w-full h-2 rounded glass-progress"
-                        style={{
-                          width: `${healthPercentage}%`,
-                          backgroundColor: "green", // Health progress bar color
+                      {/* Hidden div that appears on hover */}
+                      <div className="w-52 pt-9 bg-white/80 rounded-xl pb-8 pr-4 -left-20 absolute -top-20 shadow-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300 ">
+                        <div className="relative w-full mb-2">
+                          <div className="absolute -top-8 left-6">{plantData.prompt}</div>
+                          <div className="absolute top-2 left-6 text-lg">{life(plantData.age)}</div>
+                          <div
+                            className="absolute top-0 left-3 w-full h-2 rounded glass-progress"
+                            style={{
+                              width: `${healthPercentage}%`,
+                              backgroundColor: healthPercentage > 50 ? 'green' : 'red',
+                            }}
+                          ></div>
+                          <span
+                            className="absolute top-0 left-2/3 transform -translate-x-1/2 text-black text-xs font-semibold"
+                            style={{ top: '-20px' }}
+                          >
+                            {Math.round(healthPercentage)}%
+                          </span>
+                        </div>
+                      </div>
+
+                      {/* Circular Progress Bar */}
+                      <CircularProgressbar
+                        value={healthPercentage}
+                        styles={{
+                          path: {
+                            stroke: healthPercentage <= 20 ? 'blue' : healthPercentage <= 40 ? 'lightblue' : healthPercentage <= 60 ? 'red' : healthPercentage <= 80 ? 'lightgreen' : 'green',
+                          },
                         }}
-                      ></div>
-
-                      <span
-                        className="absolute top-0 left-2/3 transform -translate-x-1/2 text-black text-xs font-semibold"
-                        style={{ top: '-20px' }} // Adjust position of percentage text
-                      >
-                        {Math.round(healthPercentage)}%
-                      </span>
+                      />
                     </div>
-
                   </div>
-                  <img
-                    src={checkUnhealthy(plantData.plant, plantData.health, plantData.age)}
-                    alt={`Healthy Plant ${index + 1}`} className="absolute top-10"
-                  />
-
                 </div>
-              )
-            }
-            )
-            : goodPlants.map((plantData, index) => {
-              const healthPercentage = (plantData.health / 10) * 100; // Health to percentage
-              return (
-                <div key={index} className="plant relative">
-                  <div className="w-52 bg-transparent pt-9 pb-8  pr-4 absolute -top-20">
-                    <div className="relative w-full mb-2">
-                      <div className="absolute -top-8 left-6">{plantData.prompt}</div>
-                      <div className="absolute top-2 left-6 text-1xl">{life(plantData.age)}</div>
 
-                      <div
-                        className="absolute top-0 left-3 w-full h-2 rounded glass-progress"
-                        style={{
-                          width: `${healthPercentage}%`,
-                          backgroundColor: "green", // Health progress bar color
-                        }}
-                      ></div>
-
-                      <span
-                        className="absolute top-0 left-2/3 transform -translate-x-1/2 text-black text-xs font-semibold"
-                        style={{ top: '-20px' }} // Adjust position of percentage text
-                      >
-                        {Math.round(healthPercentage)}%
-                      </span>
-                    </div>
-
-                  </div>
-
-                  <img
-                    src={checkValue(plantData.plant, plantData.health, plantData.age)}
-                    alt={`Healthy Plant ${index + 1}`} className="absolute top-10"
-                  />
-
-                </div>
-              )
-            })}
+              </div>
+            );
+          })
+          }
         </div>
       </div>
     </>
