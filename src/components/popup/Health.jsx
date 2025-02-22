@@ -31,9 +31,8 @@ const { setModelHealth,toggleModal } = useContext(AppContext);
 
   const handleSaveasPerious = async (e) => {
     e.preventDefault();
-    setModelHealth( {
-      'healthPrompt': ['Same']
-    })
+    setModelHealth( ['Same']
+    )
     onClose()
     toggleModal('toxic')
   }

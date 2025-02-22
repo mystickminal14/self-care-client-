@@ -40,6 +40,12 @@ import cactus5 from "../../assets/bad plants/Final Cactus (5).png";
 
 import cactus6 from "../../assets/bad plants/Final Cactus 6.png";
 
+
+//dead plants
+import Withered from "../../assets/bad plants/Withered Flower.png";
+import Withering from "../../assets/bad plants/Withering Flower.png";
+import FinalWithering from "../../assets/bad plants/Final Withered Flower.png";
+
 import "./dash.css";
 import useGet from "../../hooks/useGet";
 import useDelete from "../../hooks/useDelete";
@@ -58,6 +64,83 @@ const Dashboard = () => {
   const { handleData } = usePlant("/garden");
   const healthyPlants = [root, stem, shoot, one, one, two];
   const healthy = {
+    G1: [
+      {
+        1: root,
+        2: root,
+        3: shoot,
+        4: shoot,
+        5: stem,
+        6: stem,
+        7: pinkBud,
+        8: pinkBud,
+        9: pink,
+        10: pink,
+      },
+    ],
+    G2: {
+      1: root,
+      2: root,
+      3: shoot,
+      4: shoot,
+      5: stem,
+      6: stem,
+      7: purpleBud,
+      8: purpleBud,
+      9: purple,
+      10: purple,
+    },
+
+    G3: {
+      1: root,
+      2: root,
+      3: shoot,
+      4: shoot,
+      5: stem,
+      6: stem,
+      7: yellowBud,
+      8: yellowBud,
+      9: yellow,
+      10: yellow,
+    },
+    G4: {
+      1: root,
+      2: root,
+      3: shoot,
+      4: shoot,
+      5: stem,
+      6: stem,
+      7: redBud,
+      8: redBud,
+      8: red,
+      10: red,
+    },
+    G5: {
+      1: root,
+      2: root,
+      3: shoot,
+      4: shoot,
+      5: stem,
+      6: stem,
+      7: yellowBud,
+      8: yellowBud,
+      9: extOrange,
+      10: extOrange,
+    },
+    G6: {
+      1: root,
+      2: root,
+      3: shoot,
+      4: shoot,
+      5: stem,
+      6: stem,
+      7: yellowBud,
+      8: yellowBud,
+      9: extYellow,
+      10: extYellow,
+    },
+  };
+  const healthAndAge = {
     G1: [
       {
         1: root,
