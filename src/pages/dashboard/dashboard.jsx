@@ -89,7 +89,7 @@ const Dashboard = () => {
       8: yellowBud,
       9: yellow,
       10: yellow,
-     
+
     },
     G4: {
       1: root,
@@ -135,12 +135,12 @@ const Dashboard = () => {
         2: root,
         3: shoot,
         4: shoot,
-        5: stem,
-        6: stem,
-        7: pinkBud,
-        8: pinkBud,
-        9: pink,
-        10: pink,
+        5: growth,
+        6: growth,
+        7: stem,
+        8: stem,
+        9: cactus1,
+        10: cactus1,
       },
     ],
     B2: {
@@ -148,12 +148,12 @@ const Dashboard = () => {
       2: root,
       3: shoot,
       4: shoot,
-      5: stem,
-      6: stem,
-      7: purpleBud,
-      8: purpleBud,
-      9: purple,
-      10: purple,
+      5: growth,
+      6: growth,
+      7: stem,
+      8: stem,
+      9: cactus2,
+      10: cactus2,
     },
 
     B3: {
@@ -161,49 +161,48 @@ const Dashboard = () => {
       2: root,
       3: shoot,
       4: shoot,
-      5: stem,
-      6: stem,
-      7: yellowBud,
-      8: yellowBud,
-      9: yellow,
-      10: yellow,
-     
+      5: growth,
+      6: growth,
+      7: stem,
+      8: stem,
+      9: cactus3,
+      10: cactus3,
     },
     B4: {
       1: root,
       2: root,
       3: shoot,
       4: shoot,
-      5: stem,
-      6: stem,
-      7: redBud,
-      8: redBud,
-      8: red,
-      10: red,
+      5: growth,
+      6: growth,
+      7: stem,
+      8: stem,
+      9: cactus4,
+      10: cactus4,
     },
     B5: {
       1: root,
       2: root,
       3: shoot,
       4: shoot,
-      5: stem,
-      6: stem,
-      7: yellowBud,
-      8: yellowBud,
-      9: extOrange,
-      10: extOrange,
+      5: growth,
+      6: growth,
+      7: stem,
+      8: stem,
+      9: cactus5,
+      10: cactus5,
     },
     B6: {
       1: root,
       2: root,
       3: shoot,
       4: shoot,
-      5: stem,
-      6: stem,
-      7: yellowBud,
-      8: yellowBud,
-      9: extYellow,
-      10: extYellow,
+      5: growth,
+      6: growth,
+      7: stem,
+      8: stem,
+      9: cactus6,
+      10: cactus6,
     },
   };
   const checkValue = (plant, age) => {
@@ -212,7 +211,7 @@ const Dashboard = () => {
     }
     return root;
   };
-  
+
 
   const unhealthyPlants = [root, cactus, cactus, cactus2, cactus1];
   const handleLogout = async () => {
@@ -221,7 +220,7 @@ const Dashboard = () => {
       navigate("/");
     }
   };
-  console.log("good plabrts",goodPlants)
+  console.log("good plabrts", goodPlants)
   return (
     <>
       {/* Sidebar */}
@@ -272,28 +271,27 @@ const Dashboard = () => {
       </div>
 
       <div
-        className={`tab-content ${
-          activeTab === "healthy" ? "healthy" : "unhealthy"
-        }`}
+        className={`tab-content ${activeTab === "healthy" ? "healthy" : "unhealthy"
+          }`}
       >
         <div className="flex justify-center gap-9 items-end p-9 h-screen">
           {activeTab === "unhealthy"
             ? badPlants.map((plantData, index) => (
-                <div key={index} className="plant">
-                  <img
-                    src={checkValue(plantData.plant, plantData.age)}
-                    alt={`Unhealthy Plant ${index + 1}`}
-                  />
-                </div>
-              ))
+              <div key={index} className="plant">
+                <img
+                  src={checkValue(plantData.plant, plantData.age)}
+                  alt={`Unhealthy Plant ${index + 1}`}
+                />
+              </div>
+            ))
             : goodPlants.map((plantData, index) => (
-                <div key={index} className="plant">
-                  <img
-                    src={checkValue(plantData.plant, plantData.age)}
-                    alt={`Healthy Plant ${index + 1}`}
-                  />
-                </div>
-              ))}
+              <div key={index} className="plant">
+                <img
+                  src={checkValue(plantData.plant, plantData.age)}
+                  alt={`Healthy Plant ${index + 1}`}
+                />
+              </div>
+            ))}
         </div>
       </div>
     </>
@@ -303,11 +301,10 @@ const Dashboard = () => {
 // Sidebar Button Component
 const SidebarButton = ({ icon, isActive, onClick }) => (
   <button
-    className={`flex curs items-center justify-center w-12 h-12 rounded-full shadow-md transition-all ${
-      isActive
-        ? "bg-green-500 text-white"
-        : "bg-white bg-opacity-30 hover:bg-opacity-50"
-    }`}
+    className={`flex curs items-center justify-center w-12 h-12 rounded-full shadow-md transition-all ${isActive
+      ? "bg-green-500 text-white"
+      : "bg-white bg-opacity-30 hover:bg-opacity-50"
+      }`}
     onClick={onClick}
   >
     {icon}
