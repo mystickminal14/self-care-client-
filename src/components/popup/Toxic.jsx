@@ -28,9 +28,10 @@ const ToxicModal = ({ onClose }) => {
   let [color, setColor] = useState("#ffffff");
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setLoading(true); // Set loading to true when the submit button is clicked
+    setLoading(true);
     await update();
-    setLoading(false); // Set loading to false after the update
+    setLoading(false); 
+    setRefreshData(true)
     onClose();
   };
 
@@ -97,7 +98,7 @@ const ToxicModal = ({ onClose }) => {
 
         {/* Loader */}
         {loading && (
-          <div className="fixed inset-0 flex justify-center items-center bg-opacity-50 bg-gray-800 z-50">
+          <div className="fixed inset-0 flex justify-center items-center bg-opacity-50 z-50">
             <ClockLoader
               color={color}
               loading={loading}
