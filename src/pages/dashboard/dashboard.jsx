@@ -1,10 +1,16 @@
 import React, { useContext, useState } from "react";
-import { FaLeaf, FaSmoking, FaHeart, FaSignOutAlt, FaGuilded } from "react-icons/fa";
+import {
+  FaLeaf,
+  FaSmoking,
+  FaHeart,
+  FaSignOutAlt,
+  FaGuilded,
+} from "react-icons/fa";
 import HealthModal from "../../components/popup/Health";
 import FoodModal from "../../components/popup/Food";
 import ToxicModal from "../../components/popup/Toxic";
 import { Tooltip } from "react-tooltip";
-import 'react-tooltip/dist/react-tooltip.css'
+import "react-tooltip/dist/react-tooltip.css";
 // Healthy plants
 import root from "../../assets/goodPlant/Seed.png";
 import shoot from "../../assets/goodPlant/Shoot.png";
@@ -40,12 +46,11 @@ import cactus5 from "../../assets/bad plants/Final Cactus (5).png";
 
 import cactus6 from "../../assets/bad plants/Final Cactus 6.png";
 
-
 //dead plants
-import Withered from "../../assets/bad plants/Withered Flower.png";
-import Withering from "../../assets/bad plants/Withering Flower.png";
-import FinalWithering from "../../assets/bad plants/Final Withered Flower.png";
-
+import Withered from "../../assets/goodPlant/Withered Flower.png";
+import Withering from "../../assets/goodPlant/Withering Flower.png";
+import FinalWithering from "../../assets/goodPlant/Final Withered Flower.png";
+import FinalWitheringDEAD from "../../assets/goodPlant/Final_Withered_Flower.png";
 import "./dash.css";
 import useGet from "../../hooks/useGet";
 import useDelete from "../../hooks/useDelete";
@@ -56,28 +61,35 @@ import GuideModal from "../../components/popup/Guide";
 
 const Dashboard = () => {
   const [activeTab, setActiveTab] = useState("healthy");
-  const { goodPlants, badPlants ,activeModal,activeSidebar, setActiveSidebar, toggleModal,setActiveModal} = useContext(AppContext);
-  
+  const {
+    goodPlants,
+    badPlants,
+    activeModal,
+    activeSidebar,
+    setActiveSidebar,
+    toggleModal,
+    setActiveModal,
+  } = useContext(AppContext);
+
   const navigate = useNavigate();
-  
+
   const { handleDelete } = useDelete("/auth/logout");
   const { handleData } = usePlant("/garden");
   const healthyPlants = [root, stem, shoot, one, one, two];
   const healthy = {
-    G1: [
-      {
-        1: root,
-        2: root,
-        3: shoot,
-        4: shoot,
-        5: stem,
-        6: stem,
-        7: pinkBud,
-        8: pinkBud,
-        9: pink,
-        10: pink,
-      },
-    ],
+    G1: {
+      1: root,
+      2: root,
+      3: shoot,
+      4: shoot,
+      5: stem,
+      6: stem,
+      7: pinkBud,
+      8: pinkBud,
+      9: pink,
+      10: pink,
+    },
+
     G2: {
       1: root,
       2: root,
@@ -141,85 +153,53 @@ const Dashboard = () => {
     },
   };
   const healthAndAge = {
-    G1: [
-      {
-        1: root,
-        2: root,
-        3: shoot,
-        4: shoot,
-        5: stem,
-        6: stem,
-        7: pinkBud,
-        8: pinkBud,
-        9: pink,
-        10: pink,
-      },
-    ],
-    G2: {
-      1: root,
-      2: root,
-      3: shoot,
-      4: shoot,
-      5: stem,
-      6: stem,
-      7: purpleBud,
-      8: purpleBud,
-      9: purple,
-      10: purple,
+    G1: {
+      1: FinalWitheringDEAD,
+      2: FinalWithering,
+      3: Withered,
+      4: Withering,
+      5: Withering,
+     
     },
 
+    G2: {
+      1: FinalWitheringDEAD,
+      2: FinalWithering,
+      3: Withered,
+      4: Withering,
+      5: Withering,
+    },
     G3: {
-      1: root,
-      2: root,
-      3: shoot,
-      4: shoot,
-      5: stem,
-      6: stem,
-      7: yellowBud,
-      8: yellowBud,
-      9: yellow,
-      10: yellow,
+      1: FinalWitheringDEAD,
+      2: FinalWithering,
+      3: Withered,
+      4: Withering,
+      5: Withering,
     },
     G4: {
-      1: root,
-      2: root,
-      3: shoot,
-      4: shoot,
-      5: stem,
-      6: stem,
-      7: redBud,
-      8: redBud,
-      8: red,
-      10: red,
+      1: FinalWitheringDEAD,
+      2: FinalWithering,
+      3: Withered,
+      4: Withering,
+      5: Withering,
     },
     G5: {
-      1: root,
-      2: root,
-      3: shoot,
-      4: shoot,
-      5: stem,
-      6: stem,
-      7: yellowBud,
-      8: yellowBud,
-      9: extOrange,
-      10: extOrange,
+      1: FinalWitheringDEAD,
+      2: FinalWithering,
+      3: Withered,
+      4: Withering,
+      5: Withering,
     },
     G6: {
-      1: root,
-      2: root,
-      3: shoot,
-      4: shoot,
-      5: stem,
-      6: stem,
-      7: yellowBud,
-      8: yellowBud,
-      9: extYellow,
-      10: extYellow,
+      1: FinalWitheringDEAD,
+      2: FinalWithering,
+      3: Withered,
+      4: Withering,
+      5: Withering,
     },
   };
   const unHealthy = {
-    B1:
-    {
+    B1: {
       1: root,
       2: root,
       3: cactusShoot,
@@ -294,9 +274,13 @@ const Dashboard = () => {
       10: cactus6,
     },
   };
-  const checkValue = (plant, age) => {
+  const checkValue = (plant, health, age) => {
     if (healthy[plant]) {
-      return healthy[plant][age] || root;
+      if (health > 5) {
+        return healthy[plant][age] || root;
+     
+      }
+      return healthAndAge[plant][health] || root;
     }
     return root;
   };
@@ -308,12 +292,15 @@ const Dashboard = () => {
     return root;
   };
   const handleLogout = async () => {
-    const check = await handleDelete();
-    if (check) {
-      navigate("/");
+    try {
+      const check = await handleDelete();
+      if (check) navigate("/");
+      else alert("Logout failed. Please try again.");
+    } catch (error) {
+      console.error("Logout error:", error);
     }
   };
- 
+
   return (
     <>
       {/* Sidebar */}
@@ -330,30 +317,35 @@ const Dashboard = () => {
           />
         </a>
         <Tooltip id="food-tooltip" variant="success" />
-        <a data-tooltip-id="toxic-tooltip"
-          data-tooltip-content="Toxic" data-tooltip-place="right"
+        <a
+          data-tooltip-id="toxic-tooltip"
+          data-tooltip-content="Toxic"
+          data-tooltip-place="right"
         >
           <SidebarButton
             icon={<FaSmoking />}
             isActive={activeSidebar === "toxic"}
             onClick={() => toggleModal("toxic")}
-
-
           />
         </a>
         <Tooltip id="toxic-tooltip" variant="success" />
-        <a data-tooltip-id="health-tooltip"
-          data-tooltip-content="Health" data-tooltip-place="right">
+        <a
+          data-tooltip-id="health-tooltip"
+          data-tooltip-content="Health"
+          data-tooltip-place="right"
+        >
           <SidebarButton
             icon={<FaHeart />}
             isActive={activeSidebar === "health"}
             onClick={() => toggleModal("health")}
-
           />
         </a>
         <Tooltip id="health-tooltip" variant="success" />
-        <a data-tooltip-id="guide-tooltip"
-          data-tooltip-content="Guide" data-tooltip-place="right">
+        <a
+          data-tooltip-id="guide-tooltip"
+          data-tooltip-content="Guide"
+          data-tooltip-place="right"
+        >
           <SidebarButton
             isActive={activeSidebar === "guide"}
             onClick={() => toggleModal("guide")}
@@ -362,16 +354,15 @@ const Dashboard = () => {
         </a>
 
         <Tooltip id="guide-tooltip" variant="success" />
-        <a data-tooltip-id="logout-tooltip"
-          data-tooltip-content="Food Safety" data-tooltip-place="right">
-          <SidebarButton
-            onClick={handleLogout}
-            icon={<FaSignOutAlt />}
-          />
+        <a
+          data-tooltip-id="logout-tooltip"
+          data-tooltip-content="Food Safety"
+          data-tooltip-place="right"
+        >
+          <SidebarButton onClick={handleLogout} icon={<FaSignOutAlt />} />
         </a>
 
         <Tooltip id="logout-tooltip" variant="success" />
-
       </div>
 
       {activeModal === "health" && (
@@ -404,30 +395,30 @@ const Dashboard = () => {
       </div>
 
       <div
-        className={`tab-content ${activeTab === "healthy" ? "healthy" : "unhealthy"
-          }`}
+        className={`tab-content ${
+          activeTab === "healthy" ? "healthy" : "unhealthy"
+        }`}
       >
         <div className="flex justify-center gap-9 items-end p-9 h-screen">
           {activeTab === "unhealthy"
             ? badPlants.map((plantData, index) => (
-              <div key={index} className="plant">
-                <img
-                  src={checkUnhealthy(plantData.plant, plantData.age)}
-                  alt={`Unhealthy Plant ${index + 1}`}
-                />
-                <h1>{plantData.prompt}</h1>
-              </div>
-            ))
+                <div key={index} className="plant">
+                  <img
+                    src={checkUnhealthy(plantData.plant, plantData.age)}
+                    alt={`Unhealthy Plant ${index + 1}`}
+                  />
+                  <h1>{plantData.prompt}</h1>
+                </div>
+              ))
             : goodPlants.map((plantData, index) => (
-              <div key={index} className="plant">
-                <img
-                  src={checkValue(plantData.plant, plantData.age)}
-                  alt={`Healthy Plant ${index + 1}`}
-
-                />
-                <h1>{plantData.prompt}</h1>
-              </div>
-            ))}
+                <div key={index} className="plant">
+                  <img
+                    src={checkValue(plantData.plant, plantData.age)}
+                    alt={`Healthy Plant ${index + 1}`}
+                  />
+                  <h1>{plantData.prompt}</h1>
+                </div>
+              ))}
         </div>
       </div>
     </>
@@ -437,10 +428,11 @@ const Dashboard = () => {
 // Sidebar Button Component
 const SidebarButton = ({ icon, isActive, onClick }) => (
   <button
-    className={`flex curs items-center justify-center w-12 h-12 rounded-full shadow-md transition-all ${isActive
-      ? "bg-green-500 text-white"
-      : "bg-white bg-opacity-30 hover:bg-opacity-50"
-      }`}
+    className={`flex curs items-center justify-center w-12 h-12 rounded-full shadow-md transition-all ${
+      isActive
+        ? "bg-green-500 text-white"
+        : "bg-white bg-opacity-30 hover:bg-opacity-50"
+    }`}
     onClick={onClick}
   >
     {icon}
