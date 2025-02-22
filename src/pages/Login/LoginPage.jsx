@@ -23,10 +23,13 @@ const LoginPage = () => {
 const navigate=useNavigate()
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log("Form Data Submitted:", data);
+   
    const check= loginUser();
-   if(check){
+   console.log(check)
+   if(check==true){
     navigate('/dashboard')
+   }else{
+    navigate('/')
    }
 
   };
