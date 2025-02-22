@@ -1,15 +1,17 @@
 import React, { useCallback, useContext, useEffect, useState } from "react";
 import axios from "../api/BaseApi";
 import { AppContext } from "../context/app.context";
-const useGet = (url) => {
-  const [newData, SetNewData] = useState();
-  const { setData, isLoading, setIsLoading } = useContext(AppContext);
+const usePlant = (url) => {
+ 
+  const {setGoodPlants, setBadPlants, isLoading, setIsLoading } = useContext(AppContext);
   const handleData = useCallback(async () => {
     setIsLoading(true);
     try {
       const response = await axios.get(url);
-      console.log(response.data);
-      SetNewData(response.data);
+      const goodPlant= response?.data.filter((value)=> value['plantType']==="Good")
+      const badPlant= response?.data.filter((value)=> value['plantType']==="Bad")
+      console.log(goodPlant)
+      console.log(badPlant)
       setData(response.data);
       setIsLoading(false);
     } catch (error) {
@@ -20,7 +22,7 @@ const useGet = (url) => {
   useEffect(() => {
     handleData();
   }, [url]);
-  return { newData, isLoading, handleData };
+  return { isLoading, handleData };
 };
 
-export default useGet;
+export default usePlant;

@@ -14,11 +14,13 @@ const ToastOptions = {
 export default function ContextApp({ children }) {
   const [isLoading, setIsLoading] = useState();
   const [data, setData] = useState();
-
   const [health, setHealth] = useState([]);
   const [regular, setRegular] = useState([]);
   const [occasional, setOccasional] = useState([]);
   const [toxic, setToxic] = useState([]);
+  const [goodPlants, setGoodPlants] = useState([]);
+  const [badPlants, setBadPlants] = useState([]);
+
   const showToast = (message, type = "default") => {
     switch (type) {
       case "warn":
@@ -40,7 +42,7 @@ export default function ContextApp({ children }) {
   };
 
   return (
-    <AppContext.Provider value={{ data, setData, showToast, setHealth, health, toxic, setToxic, regular, occasional, setOccasional, setRegular, setIsLoading, isLoading }}>
+    <AppContext.Provider value={{ data, goodPlants,badPlants, setBadPlants, setGoodPlants,setData, showToast, setHealth, health, toxic, setToxic, regular, occasional, setOccasional, setRegular, setIsLoading, isLoading }}>
       <ToastContainer />
       {children}
     </AppContext.Provider>

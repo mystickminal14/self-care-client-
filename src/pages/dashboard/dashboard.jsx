@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { FaLeaf, FaSmoking, FaHeart, FaSignOutAlt } from "react-icons/fa";
 import HealthModal from "../../components/popup/Health";
 import FoodModal from "../../components/popup/Food";
@@ -20,25 +20,29 @@ import "./dash.css";
 import useGet from "../../hooks/useGet";
 import useDelete from "../../hooks/useDelete";
 import { useNavigate } from "react-router-dom";
+import { AppContext } from "../../context/app.context";
+import usePlant from "../../hooks/usePlant";
 
 const Dashboard = () => {
   const [activeTab, setActiveTab] = useState("healthy");
   const [activeModal, setActiveModal] = useState(null);
+    const {data, setData } = useContext(AppContext);
   const [activeSidebar, setActiveSidebar] = useState(null);
- const navigate=useNavigate()
+  const navigate = useNavigate();
   const toggleModal = (modalName) => {
     setActiveModal((prev) => (prev === modalName ? null : modalName));
     setActiveSidebar((prev) => (prev === modalName ? null : modalName));
   };
   const { handleDelete } = useDelete("/auth/logout");
+  const { handleData } = usePlant("/garden");
   const healthyPlants = [root, stem, shoot, one, one, two];
   const unhealthyPlants = [root, cactus, cactus, cactus2, cactus1];
-const handleLogout=async()=>{
-  const check = await handleDelete();
-  if (check) {
-    navigate("/");
-  }
-}
+  const handleLogout = async () => {
+    const check = await handleDelete();
+    if (check) {
+      navigate("/");
+    }
+  };
   return (
     <>
       {/* Sidebar */}
@@ -58,10 +62,7 @@ const handleLogout=async()=>{
           isActive={activeSidebar === "health"}
           onClick={() => toggleModal("health")}
         />
-        <SidebarButton
-          onClick={handleLogout}
-          icon={<FaSignOutAlt />}
-        />
+        <SidebarButton onClick={handleLogout} icon={<FaSignOutAlt />} />
       </div>
 
       {/* Modals */}
@@ -91,7 +92,6 @@ const handleLogout=async()=>{
         </button>
       </div>
 
-      {/* Plant Section */}
       <div
         className={`tab-content ${
           activeTab === "healthy" ? "healthy" : "unhealthy"
