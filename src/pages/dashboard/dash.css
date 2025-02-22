@@ -11,6 +11,13 @@
     background-position: center;
     background-repeat: no-repeat;
 }
+.glass-progress {
+  background: rgba(255, 255, 255, 0.1); /* Transparent white background */
+  backdrop-filter: blur(10px); /* Blur effect */
+  border-radius: 10px; /* Rounded corners */
+  border: 1px solid rgba(255, 255, 255, 0.2); /* Border with slight transparency */
+  padding: 2px;
+}
 
 .plant {
     width: 200px;
