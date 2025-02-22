@@ -429,7 +429,7 @@ const Dashboard = () => {
               const healthPercentage = (plantData.health / 10) * 100; // Health to percentage
               return (
                 <div key={index} className="plant relative">
-                  <div className="w-52 bg-white pt-9 pb-5 pl- pr-4 absolute -top-20">
+                  <div className="w-52 pt-9 pb-5 pl- pr-4 absolute -top-20">
                     <div className="relative w-full mb-2">
                       <div className="absolute -top-8 left-6">{plantData.prompt}</div>
                       <div className="absolute top-2 left-6 text-1xl">{life(plantData.age)}</div>
