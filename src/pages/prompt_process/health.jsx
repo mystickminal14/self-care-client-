@@ -25,7 +25,7 @@ const Tabs = () => {
 
   const [selectedDiseases, setSelectedDiseases] = useState([]);
   const [isNormal, setIsNormal] = useState(false);
-  const { setHealth } = useContext(AppContext);
+  const { setHealth,setRefreshData } = useContext(AppContext);
   const navigate = useNavigate();
 
   const toggleSelection = (disease) => {
@@ -48,7 +48,7 @@ const Tabs = () => {
 
   const handleSubmit = async () => {
     setHealth(isNormal ? ["normal"] : selectedDiseases);
-    console.log(selectedDiseases)
+     setRefreshData(true)
     navigate('/regular-food');
   };
 

@@ -5,7 +5,7 @@ import useHandleError from "./useHandleError";
 
 const useDelete = (url) => {
   const [responseMessage, setResponseMessage] = useState();
-  const { setIsLoading, showToast } = useContext(AppContext);
+  const { setIsLoading, setData,setHealth,setRefreshData,setRegular,setOccasional,setToxic,setGoodPlants,setBadPlants } = useContext(AppContext);
   const handleError = useHandleError();
   const handleDelete = useCallback(async () => {
     setIsLoading(true);
@@ -14,7 +14,14 @@ const useDelete = (url) => {
       const response = await axios.delete(url);
       console.log(response.data); 
       setResponseMessage(response.data);
-
+      setHealth([])
+      setRegular([])
+      setOccasional([])
+      setToxic([])
+      setOccasional([])
+      setToxic([]) 
+       setGoodPlants([])
+       setBadPlants([])
       return true;
     } catch (error) {
       console.log(error);

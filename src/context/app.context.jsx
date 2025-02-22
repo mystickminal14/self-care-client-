@@ -15,6 +15,7 @@ export default function ContextApp({ children }) {
   const [isLoading, setIsLoading] = useState();
   const [data, setData] = useState();
   const [health, setHealth] = useState([]);
+  const [refresh, setRefreshData] = useState(false);
   const [regular, setRegular] = useState([]);
   const [occasional, setOccasional] = useState([]);
   const [toxic, setToxic] = useState([]);
@@ -42,7 +43,7 @@ export default function ContextApp({ children }) {
   };
 
   return (
-    <AppContext.Provider value={{ data, goodPlants,badPlants, setBadPlants, setGoodPlants,setData, showToast, setHealth, health, toxic, setToxic, regular, occasional, setOccasional, setRegular, setIsLoading, isLoading }}>
+    <AppContext.Provider value={{ data,refresh, setRefreshData, goodPlants,badPlants, setBadPlants, setGoodPlants,setData, showToast, setHealth, health, toxic, setToxic, regular, occasional, setOccasional, setRegular, setIsLoading, isLoading }}>
       <ToastContainer />
       {children}
     </AppContext.Provider>

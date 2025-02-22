@@ -234,7 +234,8 @@ const Dashboard = () => {
       navigate("/");
     }
   };
-  console.log("good plabrts", badPlants);
+  console.log("bad plabrts", badPlants);
+  console.log("good plabrts", goodPlants);
   return (
     <>
       {/* Sidebar */}
