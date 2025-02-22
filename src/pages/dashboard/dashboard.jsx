@@ -3,7 +3,8 @@ import { FaLeaf, FaSmoking, FaHeart, FaSignOutAlt } from "react-icons/fa";
 import HealthModal from "../../components/popup/Health";
 import FoodModal from "../../components/popup/Food";
 import ToxicModal from "../../components/popup/Toxic";
-
+import { Tooltip } from "react-tooltip";
+import 'react-tooltip/dist/react-tooltip.css'
 // Healthy plants
 import root from "../../assets/goodPlant/Seed.png";
 import shoot from "../../assets/goodPlant/Shoot.png";
@@ -239,24 +240,52 @@ const Dashboard = () => {
     <>
       {/* Sidebar */}
       <div className="fixed left-0 top-0 h-full flex flex-col gap-4 p-4 bg-transparent">
-        <SidebarButton
-          icon={<FaLeaf />}
-          isActive={activeSidebar === "food"}
-          onClick={() => toggleModal("food")}
-        />
-        <SidebarButton
-          icon={<FaSmoking />}
-          isActive={activeSidebar === "toxic"}
-          onClick={() => toggleModal("toxic")}
-        />
-        <SidebarButton
-          icon={<FaHeart />}
-          isActive={activeSidebar === "health"}
-          onClick={() => toggleModal("health")}
-        />
-        <SidebarButton onClick={handleLogout} icon={<FaSignOutAlt />} />
-      </div>
+        <a
+          data-tooltip-id="food-tooltip"
+          data-tooltip-content="Food"
+          data-tooltip-place="right"
+        >
+          <SidebarButton
+            icon={<FaLeaf />}
+            isActive={activeSidebar === "food"}
+            onClick={() => toggleModal("food")}
+          />
+        </a>
+        <Tooltip id="food-tooltip" variant="success" />
+        <a data-tooltip-id="toxic-tooltip"
+          data-tooltip-content="Toxic" data-tooltip-place="right"
+        >
+          <SidebarButton
+            icon={<FaSmoking />}
+            isActive={activeSidebar === "toxic"}
+            onClick={() => toggleModal("toxic")}
 
+
+          />
+        </a>
+        <Tooltip id="toxic-tooltip" variant="success" />
+        <a data-tooltip-id="health-tooltip"
+          data-tooltip-content="Health" data-tooltip-place="right">
+          <SidebarButton
+            icon={<FaHeart />}
+            isActive={activeSidebar === "health"}
+            onClick={() => toggleModal("health")}
+
+          />
+        </a>
+        <Tooltip id="health-tooltip" variant="success" />
+
+        <a data-tooltip-id="logout-tooltip"
+          data-tooltip-content="Food Safety" data-tooltip-place="right">
+          <SidebarButton
+            onClick={handleLogout}
+            icon={<FaSignOutAlt />}
+          />
+        </a>
+
+        <Tooltip id="logout-tooltip" variant="success" />
+
+      </div>
 
       {activeModal === "health" && (
         <HealthModal onClose={() => toggleModal(null)} />
@@ -268,8 +297,8 @@ const Dashboard = () => {
         <FoodModal onClose={() => toggleModal(null)} />
       )}
 
-    
-      <div className="flex fixed left-20 py-2 justify-center mt-4 bg-transparent">
+      {/* Tab Buttons */}
+      <div className="flex fixed left-36 py-2 justify-center mt-4 bg-transparent">
         <button
           className={`tab-button ${activeTab === "healthy" ? "active" : ""}`}
           onClick={() => setActiveTab("healthy")}
