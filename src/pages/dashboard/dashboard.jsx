@@ -77,11 +77,9 @@ const Dashboard = () => {
     toggleModal,
     setActiveModal,
   } = useContext(AppContext);
-
   const navigate = useNavigate();
-
   const { handleDelete } = useDelete("/auth/logout");
- 
+  const { handleData } = usePlant("/garden");
   const healthy = {
     G1: {
       1: root,

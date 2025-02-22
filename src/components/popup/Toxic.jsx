@@ -18,7 +18,7 @@ const ToxicModal = ({ onClose }) => {
     "hookah",
   ];
   const [selectedFoods, setSelectedFoods] = useState([]);
-  const { modelHealth, modelFood, setToxicModel, toggleModal } =
+  const { modelHealth, modelFood,setRefreshData, setToxicModel, toggleModal } =
     useContext(AppContext);
   const [loading, setLoading] = useState(false);
   const { update } = usePut("/garden/update", {

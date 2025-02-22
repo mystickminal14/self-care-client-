@@ -12,27 +12,26 @@ const LoginPage = () => {
   });
 
   const { loginUser } = useLogin("/auth/login", {
-    username: data['username'],
-    password: data['password'],
+    username: data["username"],
+    password: data["password"],
   });
 
   const handleChange = (e) => {
     const { name, value } = e.target;
     setData({ ...data, [name]: value });
   };
-const navigate=useNavigate()
-  const handleSubmit = (e) => {
+  const navigate = useNavigate();
+  const handleSubmit = async (e) => {
     e.preventDefault();
-   
-   const check= loginUser();
-   console.log(check)
-   if(check==true){
-    navigate('/dashboard')
-   }else{
-    navigate('/')
-   }
-
+    const check = await loginUser();
+    console.log(`check with data ${JSON.stringify(data)}`);
+    if (check) {
+      navigate("/dashboard");
+    } else {
+      navigate("/");
+    }
   };
+  
 
   return (
     <div className="background flex justify-center items-center h-screen">
