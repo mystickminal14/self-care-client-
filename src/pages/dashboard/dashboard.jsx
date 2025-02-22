@@ -291,6 +291,7 @@ const Dashboard = () => {
 
   const checkUnhealthy = (plant, age) => {
     if (unHealthy[plant]) {
+      console.log(unHealthy[plant][age])
       return unHealthy[plant][age] || root;
     }
     return root;
