@@ -9,9 +9,9 @@ const HealthModal = ({ onClose }) => {
     "Diabetes", "Hypertension (High Blood Pressure)", "Heart Disease",
     "Stroke", "Asthma", "Tuberculosis", "Pneumonia", "Hepatitis B",
     "Liver Cirrhosis", "Arthritis", "Osteoporosis", "Epilepsy",
-    "Lung Cancer", "Breast Cancer", "Leukemia"
+    "Lung Cancer", "Breast Cancer", "Leukemia", "degrading"
   ];
-const { setModelHealth,toggleModal } = useContext(AppContext);
+  const { setModelHealth, toggleModal } = useContext(AppContext);
   const [selectedDiseases, setSelectedDiseases] = useState([]);
   const override = {
     display: "block",
@@ -21,17 +21,24 @@ const { setModelHealth,toggleModal } = useContext(AppContext);
   const [loading, setLoading] = useState(false);
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setModelHealth(selectedDiseases )
+    setModelHealth(selectedDiseases)
     onClose()
     toggleModal('toxic')
   };
-  
+
   const { isLoading } = useContext(AppContext);
   let [color, setColor] = useState("#ffffff");
 
   const handleSaveasPerious = async (e) => {
     e.preventDefault();
-    setModelHealth( ['same']
+    setModelHealth(['same']
+    )
+    onClose()
+    toggleModal('toxic')
+  }
+  const handleImproving = async (e) => {
+    e.preventDefault();
+    setModelHealth(['improving']
     )
     onClose()
     toggleModal('toxic')
@@ -77,6 +84,9 @@ const { setModelHealth,toggleModal } = useContext(AppContext);
 
             <button className="bg-blue-800 cursor-pointer text-white px-4 py-2 rounded-md" onClick={handleSaveasPerious}>
               Save as Previous
+            </button>
+            <button className="bg-green-800 cursor-pointer text-white px-4 py-2 rounded-md" onClick={handleImproving}>
+              Improving
             </button>
             <button className="bg-red-800 cursor-pointer text-white px-4 py-2 rounded-md" onClick={onClose}>
               Cancel

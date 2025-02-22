@@ -289,7 +289,7 @@ const Dashboard = () => {
     return root;
   };
 
-  const checkUnhealthy = (plant,health, age) => {
+  const checkUnhealthy = (plant, health, age) => {
     if (unHealthy[plant]) {
       console.log(unHealthy[plant][health])
       return unHealthy[plant][health] || root;
@@ -409,11 +409,11 @@ const Dashboard = () => {
               const healthPercentage = (plantData.health / 10) * 100; // Health to percentage
               return (
                 <div key={index} className="plant relative">
-                  <div className="w-56 bg-white pt-9 pb-5 pl-4 pr-4 absolute -top-20">
+                  <div className="w-52 bg-white pt-9 pb-5 pl- pr-4 absolute -top-20">
                     <div className="relative w-full mb-2">
-                      <div className="absolute -top-8 " >{plantData.prompt}</div>
+                      <div className="absolute -top-8 left-6" >{plantData.prompt}</div>
                       <div
-                        className="absolute top-0 left-0 w-full h-2 rounded"
+                        className="absolute top-0 left-3 w-full h-2 rounded"
                         style={{
                           width: `${healthPercentage}%`,
                           backgroundColor: "green", // Health progress bar color
@@ -428,11 +428,9 @@ const Dashboard = () => {
                       </span>
                     </div>
                   </div>
-
-
                   <img
                     src={checkUnhealthy(plantData.plant, plantData.health, plantData.age)}
-                    alt={`Healthy Plant ${index + 1}`}
+                    alt={`Healthy Plant ${index + 1}`} className="absolute top-10"
                   />
 
                 </div>
@@ -443,11 +441,11 @@ const Dashboard = () => {
               const healthPercentage = (plantData.health / 10) * 100; // Health to percentage
               return (
                 <div key={index} className="plant relative">
-                  <div className="w-56 bg-white pt-9 pb-5 pl-4 pr-4 absolute -top-20">
+                  <div className="w-52 bg-white pt-9 pb-5 pl- pr-4 absolute -top-20">
                     <div className="relative w-full mb-2">
-                      <div className="absolute -top-8 " >{plantData.prompt}</div>
+                      <div className="absolute -top-8 left-6" >{plantData.prompt}</div>
                       <div
-                        className="absolute top-0 left-0 w-full h-2 rounded"
+                        className="absolute top-0 left-3 w-full h-2 rounded"
                         style={{
                           width: `${healthPercentage}%`,
                           backgroundColor: "green", // Health progress bar color
@@ -462,26 +460,10 @@ const Dashboard = () => {
                       </span>
                     </div>
                   </div>
-                  {/* <div className="relative w-full mb-2">
-                    <div
-                      className="absolute top-0 left-0 w-full h-2 rounded"
-                      style={{
-                        width: `${healthPercentage}%`,
-                        backgroundColor: "green", // Health progress bar color
-                      }}
-                    ></div>
-
-                    <span
-                      className="absolute top-0 left-1/2 transform -translate-x-1/2 text-white text-xs font-semibold"
-                      style={{ top: '-20px' }} // Adjust position of percentage text
-                    >
-                      {Math.round(healthPercentage)}%
-                    </span>
-                  </div> */}
 
                   <img
                     src={checkValue(plantData.plant, plantData.health, plantData.age)}
-                    alt={`Healthy Plant ${index + 1}`}
+                    alt={`Healthy Plant ${index + 1}`} className="absolute top-10"
                   />
 
                 </div>

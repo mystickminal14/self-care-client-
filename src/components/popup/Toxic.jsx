@@ -16,7 +16,7 @@ const ToxicModal = ({ onClose }) => {
     "hookah",
   ];
   const [selectedFoods, setSelectedFoods] = useState([]);
-  const { modelHealth, modelFood,setRefreshData, setToxicModel, toggleModal } =
+  const { modelHealth, modelFood, setRefreshData, setToxicModel, toggleModal } =
     useContext(AppContext);
   const [loading, setLoading] = useState(false);
   const { update } = usePut("/garden/update", {
@@ -25,12 +25,12 @@ const ToxicModal = ({ onClose }) => {
     toxicPrompt: selectedFoods,
   });
 
-  let [color, setColor] = useState("#ffffff");
+  let [color, setColor] = useState("#000000");
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
     await update();
-    setLoading(false); 
+    setLoading(false);
     setRefreshData(true)
     onClose();
   };
