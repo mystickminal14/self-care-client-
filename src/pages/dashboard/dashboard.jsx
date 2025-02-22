@@ -1,5 +1,5 @@
 import React, { useContext, useState } from "react";
-import { FaLeaf, FaSmoking, FaHeart, FaSignOutAlt } from "react-icons/fa";
+import { FaLeaf, FaSmoking, FaHeart, FaSignOutAlt, FaGuilded } from "react-icons/fa";
 import HealthModal from "../../components/popup/Health";
 import FoodModal from "../../components/popup/Food";
 import ToxicModal from "../../components/popup/Toxic";
@@ -46,6 +46,7 @@ import useDelete from "../../hooks/useDelete";
 import { useNavigate } from "react-router-dom";
 import { AppContext } from "../../context/app.context";
 import usePlant from "../../hooks/usePlant";
+import GuideModal from "../../components/popup/Guide";
 
 const Dashboard = () => {
   const [activeTab, setActiveTab] = useState("healthy");
@@ -268,7 +269,16 @@ const Dashboard = () => {
           />
         </a>
         <Tooltip id="health-tooltip" variant="success" />
+        <a data-tooltip-id="guide-tooltip"
+          data-tooltip-content="Guide" data-tooltip-place="right">
+          <SidebarButton
+            isActive={activeSidebar === "guide"}
+            onClick={() => toggleModal("guide")}
+            icon={<FaGuilded />}
+          />
+        </a>
 
+        <Tooltip id="guide-tooltip" variant="success" />
         <a data-tooltip-id="logout-tooltip"
           data-tooltip-content="Food Safety" data-tooltip-place="right">
           <SidebarButton
@@ -289,6 +299,9 @@ const Dashboard = () => {
       )}
       {activeModal === "food" && (
         <FoodModal onClose={() => toggleModal(null)} />
+      )}
+      {activeModal === "guide" && (
+        <GuideModal onClose={() => toggleModal(null)} />
       )}
 
       {/* Tab Buttons */}
