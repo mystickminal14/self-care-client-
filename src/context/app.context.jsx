@@ -22,6 +22,17 @@ export default function ContextApp({ children }) {
   const [goodPlants, setGoodPlants] = useState([]);
   const [badPlants, setBadPlants] = useState([]);
 
+  const[modelFood,setModelFood]=useState([])
+  const[modelHealth,setModelHealth]=useState([])
+  const[modelToxic,setToxicModel]=useState([])
+  const[activeModal, setActiveModal]=useState([])
+  const [activeSidebar, setActiveSidebar] = useState(null);
+  const toggleModal = (modalName) => {
+    setActiveModal((prev) => (prev === modalName ? null : modalName));
+    setActiveSidebar((prev) => (prev === modalName ? null : modalName));
+  };
+
+
   const showToast = (message, type = "default") => {
     switch (type) {
       case "warn":
@@ -43,7 +54,7 @@ export default function ContextApp({ children }) {
   };
 
   return (
-    <AppContext.Provider value={{ data,refresh, setRefreshData, goodPlants,badPlants, setBadPlants, setGoodPlants,setData, showToast, setHealth, health, toxic, setToxic, regular, occasional, setOccasional, setRegular, setIsLoading, isLoading }}>
+    <AppContext.Provider value={{activeSidebar, setActiveSidebar,activeModal,toggleModal, setActiveModal,modelToxic,setToxicModel,modelFood,setModelFood,modelHealth,setModelHealth, data,refresh, setRefreshData, goodPlants,badPlants, setBadPlants, setGoodPlants,setData, showToast, setHealth, health, toxic, setToxic, regular, occasional, setOccasional, setRegular, setIsLoading, isLoading }}>
       <ToastContainer />
       {children}
     </AppContext.Provider>

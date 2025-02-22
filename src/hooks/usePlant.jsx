@@ -2,7 +2,7 @@ import React, { useCallback, useContext, useEffect, useState } from "react";
 import axios from "../api/BaseApi";
 import { AppContext } from "../context/app.context";
 const usePlant = (url) => {
-  const { setGoodPlants, setBadPlants,refresh, isLoading, setIsLoading } =
+  const { setGoodPlants, setBadPlants,refresh,setRefreshData, isLoading, setIsLoading } =
     useContext(AppContext);
   const handleData = useCallback(async () => {
     setIsLoading(true);
@@ -18,7 +18,9 @@ const usePlant = (url) => {
       setGoodPlants(goodPlant);
       setBadPlants(badPlant);
       setIsLoading(false);
+      setRefreshData(false)
     } catch (error) {
+      setRefreshData(false)
       setIsLoading(false);
     }
   }, [url, setIsLoading]);

@@ -3,7 +3,9 @@ import BlockTitle from "../../components/button/block-title";
 import usePut from "../../hooks/usePut";
 import ClockLoader from "react-spinners/ClockLoader";
 import { AppContext } from "../../context/app.context";
+
 const FoodModal = ({ onClose }) => {
+  const { setModelFood,toggleModal } = useContext(AppContext);
   const individualFoods = [
     "Rice",
     "Lentils",
@@ -50,20 +52,15 @@ const FoodModal = ({ onClose }) => {
   const [selectedFoods, setSelectedFoods] = useState([]);
   const [loading, setLoading] = useState(false);
 
-  const { update } = usePut('/garden/update', {
-    'foodPrompt': selectedFoods
-  });
+ 
   let [color, setColor] = useState("#ffffff");
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setLoading(true);
-    try {
-      await update();
-      onClose();
-    } finally {
-      setLoading(false);
-    }
+    setModelFood(  selectedFoods
+    )
+    onClose()
+    toggleModal('health')
   };
   const toggleSelection = (food) => {
     setSelectedFoods((prevSelected) =>

@@ -11,11 +11,8 @@ const HealthModal = ({ onClose }) => {
     "Liver Cirrhosis", "Arthritis", "Osteoporosis", "Epilepsy",
     "Lung Cancer", "Breast Cancer", "Leukemia"
   ];
-
+const { setModelHealth,toggleModal } = useContext(AppContext);
   const [selectedDiseases, setSelectedDiseases] = useState([]);
-  const { update } = usePut('/garden/update', {
-    'healthPrompt': selectedDiseases
-  });
   const override = {
     display: "block",
     margin: "0 auto",
@@ -24,31 +21,21 @@ const HealthModal = ({ onClose }) => {
   const [loading, setLoading] = useState(false);
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setLoading(true);
-    try {
-      await update();
-      onClose();
-    } finally {
-      setLoading(false);
-    }
+    setModelHealth(selectedDiseases )
+    onClose()
+    toggleModal('toxic')
   };
-  const { update: saveOnly } = usePut('/garden/update', {
-    'healthPrompt': ['Same']
-  });
+  
   const { isLoading } = useContext(AppContext);
   let [color, setColor] = useState("#ffffff");
 
   const handleSaveasPerious = async (e) => {
-    e.preventDefault()
-    setLoading(true);
-
-    await saveOnly();
-    try {
-      await saveOnly();
-      onClose();
-    } finally {
-      setLoading(false);
-    }
+    e.preventDefault();
+    setModelHealth( {
+      'healthPrompt': ['Same']
+    })
+    onClose()
+    toggleModal('toxic')
   }
 
   const toggleSelection = (disease) => {

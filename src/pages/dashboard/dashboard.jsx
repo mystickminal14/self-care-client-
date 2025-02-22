@@ -49,15 +49,10 @@ import usePlant from "../../hooks/usePlant";
 
 const Dashboard = () => {
   const [activeTab, setActiveTab] = useState("healthy");
-  const [activeModal, setActiveModal] = useState(null);
-  const { goodPlants, badPlants } = useContext(AppContext);
-  const [activeSidebar, setActiveSidebar] = useState(null);
+  const { goodPlants, badPlants ,activeModal,activeSidebar, setActiveSidebar, toggleModal,setActiveModal} = useContext(AppContext);
+  
   const navigate = useNavigate();
-  const toggleModal = (modalName) => {
-    setActiveModal((prev) => (prev === modalName ? null : modalName));
-    setActiveSidebar((prev) => (prev === modalName ? null : modalName));
-  };
-
+  
   const { handleDelete } = useDelete("/auth/logout");
   const { handleData } = usePlant("/garden");
   const healthyPlants = [root, stem, shoot, one, one, two];
@@ -234,8 +229,7 @@ const Dashboard = () => {
       navigate("/");
     }
   };
-  console.log("bad plabrts", badPlants);
-  console.log("good plabrts", goodPlants);
+ 
   return (
     <>
       {/* Sidebar */}
