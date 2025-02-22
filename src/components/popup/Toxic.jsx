@@ -1,9 +1,7 @@
 import React, { useContext, useState } from "react";
 import BlockTitle from "../../components/button/block-title";
 import { AppContext } from "../../context/app.context";
-
 import ClockLoader from "react-spinners/ClockLoader";
-
 import usePut from './../../hooks/usePut';
 
 const ToxicModal = ({ onClose }) => {
@@ -29,15 +27,11 @@ const ToxicModal = ({ onClose }) => {
 
   let [color, setColor] = useState("#ffffff");
   const handleSubmit = async (e) => {
-    console.log({
-      foodPrompt: modelFood,
-      healthPrompt: modelHealth,
-      toxicPrompt: selectedFoods,
-    })
     e.preventDefault();
+    setLoading(true); // Set loading to true when the submit button is clicked
     await update();
+    setLoading(false); // Set loading to false after the update
     onClose();
-    setRefreshData(true);
   };
 
   const override = {
@@ -45,6 +39,7 @@ const ToxicModal = ({ onClose }) => {
     margin: "0 auto",
     borderColor: "red",
   };
+
   const toggleSelection = (food) => {
     setSelectedFoods((prevSelected) =>
       prevSelected.includes(food)
@@ -55,8 +50,9 @@ const ToxicModal = ({ onClose }) => {
 
   return (
     <>
+      {/* Modal Container */}
       <div className="fixed inset-0 flex justify-center items-center">
-        <div className="bg-sign-up max-w-xl w-[90%] h-auto justify-start bg-white flex flex-col rounded-lg shadow-lg p-5">
+        <div className="bg-sign-up max-w-xl w-[90%] h-auto justify-start bg-white flex flex-col rounded-lg shadow-lg p-5 relative">
           <div className="flex justify-center flex-col items-center p-4">
             <h1 className="text-blue-800 text-3xl font-bold w-full p-3 rounded-b-lg text-center">
               Toxic Substance Selection
@@ -98,15 +94,21 @@ const ToxicModal = ({ onClose }) => {
             </div>
           </form>
         </div>
+
+        {/* Loader */}
+        {loading && (
+          <div className="fixed inset-0 flex justify-center items-center bg-opacity-50 bg-gray-800 z-50">
+            <ClockLoader
+              color={color}
+              loading={loading}
+              cssOverride={override}
+              size={150}
+              aria-label="Loading Spinner"
+              data-testid="loader"
+            />
+          </div>
+        )}
       </div>
-      <ClockLoader
-        color={color}
-        loading={loading}
-        cssOverride={override}
-        size={150}
-        aria-label="Loading Spinner"
-        data-testid="loader"
-      />
     </>
   );
 };
