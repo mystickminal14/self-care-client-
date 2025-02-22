@@ -1,12 +1,12 @@
 .healthy {
-    background-image: url('../../assets/green.png');
+    background-image: url('../../assets/GoodBg.png');
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
 }
 
 .unhealthy {
-    background-image: url('../../assets/desert.png');
+    background-image: url('../../assets/Deseartbg.png');
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;

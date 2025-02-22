@@ -4,6 +4,7 @@ import Buttons from "../../components/button/button";
 import { AppContext } from "../../context/app.context";
 import usePost from "./../../hooks/usePost";
 import { useNavigate } from "react-router-dom";
+import ClockLoader from "react-spinners/ClockLoader";
 
 const Toxic = () => {
   const { health, regular, occasional } = useContext(AppContext);
@@ -14,18 +15,15 @@ const Toxic = () => {
     "Tobacco",
     "Cocaine",
     "Heroin",
-    "vape",
-    "hookah",
+    "Vape",
+    "Hookah",
   ];
   const navigate = useNavigate();
 
   const [selectedFoods, setSelectedFoods] = useState([]);
-  const [isNormal, setIsNormal] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
 
   const toggleSelection = (food) => {
-    if (isNormal) {
-      setIsNormal(false);
-    }
     setSelectedFoods((prevSelected) =>
       prevSelected.includes(food)
         ? prevSelected.filter((item) => item !== food)
@@ -33,58 +31,58 @@ const Toxic = () => {
     );
   };
 
-  const handleNormalSelection = () => {
-    setIsNormal(true);
-    setSelectedFoods(["Balanced Diet"]);
-  };
-  const { save, data: value } = usePost("/garden/initiate", {
+  const { save } = usePost("/garden/initiate", {
     regular: regular,
     occasional: occasional,
     healthPrompt: health,
     toxicPrompt: selectedFoods,
   });
+
   const handleSubmit = async () => {
-
-    console.log(selectedFoods);
+    setIsLoading(true);
     const check = await save();
-
-    if (check) {
-      navigate("/dashboard");
-    }
+    setIsLoading(false);
+    if (check) navigate("/dashboard");
   };
 
   return (
-    <div className="background flex justify-center text-black bg-slate-800 items-center h-full sm:h-screen">
-      <div className="bg-sign-up max-w-xl w-[90%] h-auto justify-start bg-white flex flex-col rounded-lg shadow-lg p-5">
-        <div className="flex justify-center flex-col items-center p-4">
-          <h1 className="text-blue-800 text-3xl font-bold w-full p-3 rounded-b-lg text-center">
-            Toxic Substance Selection
-          </h1>
-          <p className="text-xl text-center">
-            Do you consume any toxic substance ?
-          </p>
-        </div>
-        <form className="p-2">
-          <h1 className="text-black-800 text-2xl font-bold w-full p-3 rounded-b-lg text-start">
-            If yes, Select the Toxic Substance:
-          </h1>
-          <div className="flex flex-wrap gap-2">
-            {toxicFoods.map((food, index) => (
-              <BlockTitle
-                key={index}
-                title={food}
-                isSelected={selectedFoods.includes(food)}
-                onClick={() => toggleSelection(food)}
-              />
-            ))}
-          </div>
+    <div className="background flex justify-center items-center text-black bg-slate-800 h-full sm:h-screen">
+      <div
+        className={`bg-sign-up max-w-xl w-[90%] h-auto flex flex-col rounded-lg shadow-lg p-5 relative ${isLoading ? "bg-opacity-50" : "bg-white"
+          }`}
+      >
 
-          <div className="flex justify-end">
-            <Buttons onAdd={handleSubmit} />
+        {isLoading ? (
+          <div className="absolute inset-0 flex items-center justify-center bg-opacity-75">
+            <ClockLoader color="#ffffff" size={100} aria-label="Loading Spinner" />
           </div>
-        </form>
+        ) : (
+          <>
+            <div className="p-2">
+              <h1 className="text-black-800 text-2xl font-bold w-full p-3 text-start">
+                Select the Toxic Substances:
+              </h1>
+              <div className="flex flex-wrap gap-2">
+                {toxicFoods.map((food, index) => (
+                  <BlockTitle
+                    key={index}
+                    title={food}
+                    isSelected={selectedFoods.includes(food)}
+                    onClick={() => toggleSelection(food)}
+                  />
+                ))}
+              </div>
+            </div>
+
+            <div className="flex justify-end mt-4">
+              <Buttons onAdd={handleSubmit} disabled={isLoading}>
+                {isLoading ? "Saving..." : "Submit"}
+              </Buttons>
+            </div>
+          </>
+        )}
       </div>
-    </div>
+    </div >
   );
 };
 
