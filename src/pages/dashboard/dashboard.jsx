@@ -25,9 +25,19 @@ import red from "../../assets/goodPlant/Red Flower.png";
 import extOrange from "../../assets/goodPlant/Extra Orange Flower.png";
 import extYellow from "../../assets/goodPlant/Extra Yellow Flower.png";
 // Unhealthy plants
-import cactus from "../../assets/bad plants/Cactus Shoot.png";
+import growth from "../../assets/bad plants/Cactus Growth.png";
+import cactusShoot from "../../assets/bad plants/Cactus Shoot.png";
+import cactusSteam from "../../assets/bad plants/Cactus Steam.png";
 import cactus1 from "../../assets/bad plants/Final Cactus.png";
-import cactus2 from "../../assets/bad plants/Cactus Steam.png";
+import cactus2 from "../../assets/bad plants/Final Cactus (2).png";
+
+import cactus3 from "../../assets/bad plants/Final Cactus (3).png";
+
+import cactus4 from "../../assets/bad plants/Final Cactus (4).png";
+
+import cactus5 from "../../assets/bad plants/Final Cactus (5).png";
+
+import cactus6 from "../../assets/bad plants/Final Cactus 6.png";
 
 import "./dash.css";
 import useGet from "../../hooks/useGet";
@@ -89,7 +99,6 @@ const Dashboard = () => {
       8: yellowBud,
       9: yellow,
       10: yellow,
-
     },
     G4: {
       1: root,
@@ -133,12 +142,12 @@ const Dashboard = () => {
       {
         1: root,
         2: root,
-        3: shoot,
-        4: shoot,
+        3: cactusShoot,
+        4: cactusShoot,
         5: growth,
         6: growth,
-        7: stem,
-        8: stem,
+        7: cactusSteam,
+        8: cactusSteam,
         9: cactus1,
         10: cactus1,
       },
@@ -146,12 +155,12 @@ const Dashboard = () => {
     B2: {
       1: root,
       2: root,
-      3: shoot,
-      4: shoot,
+      3: cactusShoot,
+      4: cactusShoot,
       5: growth,
       6: growth,
-      7: stem,
-      8: stem,
+      7: cactusSteam,
+      8: cactusSteam,
       9: cactus2,
       10: cactus2,
     },
@@ -159,48 +168,48 @@ const Dashboard = () => {
     B3: {
       1: root,
       2: root,
-      3: shoot,
-      4: shoot,
+      3: cactusShoot,
+      4: cactusShoot,
       5: growth,
       6: growth,
-      7: stem,
-      8: stem,
+      7: cactusSteam,
+      8: cactusSteam,
       9: cactus3,
       10: cactus3,
     },
     B4: {
       1: root,
       2: root,
-      3: shoot,
-      4: shoot,
+      3: cactusShoot,
+      4: cactusShoot,
       5: growth,
       6: growth,
-      7: stem,
-      8: stem,
+      7: cactusSteam,
+      8: cactusSteam,
       9: cactus4,
       10: cactus4,
     },
     B5: {
       1: root,
       2: root,
-      3: shoot,
-      4: shoot,
+      3: cactusShoot,
+      4: cactusShoot,
       5: growth,
       6: growth,
-      7: stem,
-      8: stem,
+      7: cactusSteam,
+      8: cactusSteam,
       9: cactus5,
       10: cactus5,
     },
     B6: {
       1: root,
       2: root,
-      3: shoot,
-      4: shoot,
+      3: cactusShoot,
+      4: cactusShoot,
       5: growth,
       6: growth,
-      7: stem,
-      8: stem,
+      7: cactusSteam,
+      8: cactusSteam,
       9: cactus6,
       10: cactus6,
     },
@@ -212,15 +221,20 @@ const Dashboard = () => {
     return root;
   };
 
-
-  const unhealthyPlants = [root, cactus, cactus, cactus2, cactus1];
+  const checkUnhealthy = (plant, age) => {
+    if (unHealthy[plant]) {
+      return unHealthy[plant][age] || root;
+    }
+    return root;
+  };
+  const unhealthyPlants = [root, cactusShoot, growth, cactusSteam, cactus1];
   const handleLogout = async () => {
     const check = await handleDelete();
     if (check) {
       navigate("/");
     }
   };
-  console.log("good plabrts", goodPlants)
+  console.log("good plabrts", badPlants);
   return (
     <>
       {/* Sidebar */}
@@ -243,7 +257,7 @@ const Dashboard = () => {
         <SidebarButton onClick={handleLogout} icon={<FaSignOutAlt />} />
       </div>
 
-      {/* Modals */}
+
       {activeModal === "health" && (
         <HealthModal onClose={() => toggleModal(null)} />
       )}
@@ -271,27 +285,31 @@ const Dashboard = () => {
       </div>
 
       <div
-        className={`tab-content ${activeTab === "healthy" ? "healthy" : "unhealthy"
-          }`}
+        className={`tab-content ${
+          activeTab === "healthy" ? "healthy" : "unhealthy"
+        }`}
       >
         <div className="flex justify-center gap-9 items-end p-9 h-screen">
           {activeTab === "unhealthy"
             ? badPlants.map((plantData, index) => (
-              <div key={index} className="plant">
-                <img
-                  src={checkValue(plantData.plant, plantData.age)}
-                  alt={`Unhealthy Plant ${index + 1}`}
-                />
-              </div>
-            ))
+                <div key={index} className="plant">
+                  <img
+                    src={checkUnhealthy(plantData.plant, plantData.age)}
+                    alt={`Unhealthy Plant ${index + 1}`}
+                  />
+                  <h1>{plantData.plant}</h1>
+                </div>
+              ))
             : goodPlants.map((plantData, index) => (
-              <div key={index} className="plant">
-                <img
-                  src={checkValue(plantData.plant, plantData.age)}
-                  alt={`Healthy Plant ${index + 1}`}
-                />
-              </div>
-            ))}
+                <div key={index} className="plant">
+                  <img
+                    src={checkValue(plantData.plant, plantData.age)}
+                    alt={`Healthy Plant ${index + 1}`}
+                    
+                  />
+                     <h1>{plantData.plant}</h1>
+                </div>
+              ))}
         </div>
       </div>
     </>
@@ -301,10 +319,11 @@ const Dashboard = () => {
 // Sidebar Button Component
 const SidebarButton = ({ icon, isActive, onClick }) => (
   <button
-    className={`flex curs items-center justify-center w-12 h-12 rounded-full shadow-md transition-all ${isActive
-      ? "bg-green-500 text-white"
-      : "bg-white bg-opacity-30 hover:bg-opacity-50"
-      }`}
+    className={`flex curs items-center justify-center w-12 h-12 rounded-full shadow-md transition-all ${
+      isActive
+        ? "bg-green-500 text-white"
+        : "bg-white bg-opacity-30 hover:bg-opacity-50"
+    }`}
     onClick={onClick}
   >
     {icon}
