@@ -405,16 +405,40 @@ const Dashboard = () => {
       >
         <div className="flex justify-center gap-9 items-end p-9 h-screen">
           {activeTab === "unhealthy"
-            ? badPlants.map((plantData, index) => (
-              <div key={index} className="plant">
-                <img
-                  src={checkUnhealthy(plantData.plant, plantData.age)}
-                  alt={`Unhealthy Plant ${index + 1}`}
-                />
-                <h1>{plantData.prompt}</h1>
-              </div>
+            ? badPlants.map((plantData, index) => {
+              const healthPercentage = (plantData.health / 10) * 100; // Health to percentage
+              return (
+                <div key={index} className="plant relative">
+                  <div className="w-56 bg-white pt-9 pb-5 pl-4 pr-4 absolute -top-20">
+                    <div className="relative w-full mb-2">
+                      <div className="absolute -top-8 " >{plantData.prompt}</div>
+                      <div
+                        className="absolute top-0 left-0 w-full h-2 rounded"
+                        style={{
+                          width: `${healthPercentage}%`,
+                          backgroundColor: "green", // Health progress bar color
+                        }}
+                      ></div>
+
+                      <span
+                        className="absolute top-0 left-2/3 transform -translate-x-1/2 text-black text-xs font-semibold"
+                        style={{ top: '-20px' }} // Adjust position of percentage text
+                      >
+                        {Math.round(healthPercentage)}%
+                      </span>
+                    </div>
+                  </div>
+
+
+                  <img
+                    src={checkUnhealthy(plantData.plant, plantData.health, plantData.age)}
+                    alt={`Healthy Plant ${index + 1}`}
+                  />
+
+                </div>
+              )
+            }
             )
-          )
             : goodPlants.map((plantData, index) => {
               const healthPercentage = (plantData.health / 10) * 100; // Health to percentage
               return (
