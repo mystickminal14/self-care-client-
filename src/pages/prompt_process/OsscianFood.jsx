@@ -77,11 +77,11 @@ const OsscianFood = () => {
           <h1 className="text-blue-800 text-3xl font-bold w-full p-3 rounded-b-lg text-center">
             Occasion Food Selection
           </h1>
-          <p className="text-xl text-center">What do you eat in a regular diet?</p>
+          <p className="text-xl text-center">What do you eat on Occasion ?</p>
         </div>
         <form className="p-2">
           <h1 className="text-black-800 text-2xl font-bold w-full p-3 rounded-b-lg text-start">
-            Select the foods you eat Occasion:
+            Select the foods you eat on Occasion:
           </h1>
           <div className="flex flex-wrap gap-2">
             {individualFoods.map((food, index) => (
