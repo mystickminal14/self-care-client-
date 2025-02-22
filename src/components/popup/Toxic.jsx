@@ -63,11 +63,11 @@ const ToxicModal = ({ onClose }) => {
           </div>
 
           <div className="flex gap-2 justify-end p-2">
-            <button className="bg-blue-800 text-white px-4 py-2 rounded-md" onClick={handleSubmit}>
+            <button className="bg-blue-800 cursor-pointer text-white px-4 py-2 rounded-md" onClick={handleSubmit}>
               Update
             </button>
 
-            <button className="bg-red-800 text-white px-4 py-2 rounded-md" onClick={onClose}>
+            <button className="bg-red-800 cursor-pointer text-white px-4 py-2 rounded-md" onClick={onClose}>
               Cancel
             </button>
           </div>

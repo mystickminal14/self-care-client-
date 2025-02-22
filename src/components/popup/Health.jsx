@@ -60,13 +60,13 @@ const HealthModal = ({ onClose }) => {
             ))}
           </div>
           <div className="flex p-2 gap-2 justify-end">
-            <button className="bg-blue-800 text-white px-4 py-2 rounded-md" onClick={handleSubmit}>
+            <button className="bg-blue-800  cursor-pointer text-white px-4 py-2 rounded-md" onClick={handleSubmit}>
               Update
             </button>
-            <button className="bg-blue-800 text-white px-4 py-2 rounded-md" onClick={handleSaveasPerious}>
+            <button className="bg-blue-800 cursor-pointer text-white px-4 py-2 rounded-md" onClick={handleSaveasPerious}>
               Save as Previous
             </button>
-            <button className="bg-red-800 text-white px-4 py-2 rounded-md" onClick={onClose}>
+            <button className="bg-red-800 cursor-pointer text-white px-4 py-2 rounded-md" onClick={onClose}>
               Cancel
             </button>
           </div>

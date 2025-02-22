@@ -18,20 +18,27 @@ import cactus2 from "../../assets/bad plants/Cactus Steam.png";
 
 import "./dash.css";
 import useGet from "../../hooks/useGet";
+import useDelete from "../../hooks/useDelete";
+import { useNavigate } from "react-router-dom";
 
 const Dashboard = () => {
   const [activeTab, setActiveTab] = useState("healthy");
   const [activeModal, setActiveModal] = useState(null);
   const [activeSidebar, setActiveSidebar] = useState(null);
-
+ const navigate=useNavigate()
   const toggleModal = (modalName) => {
     setActiveModal((prev) => (prev === modalName ? null : modalName));
     setActiveSidebar((prev) => (prev === modalName ? null : modalName));
   };
-  const { newData } = useGet('/garden');
+  const { handleDelete } = useDelete("/auth/logout");
   const healthyPlants = [root, stem, shoot, one, one, two];
-  const unhealthyPlants = [root, cactus, cactus2, cactus1];
-
+  const unhealthyPlants = [root, cactus, cactus, cactus2, cactus1];
+const handleLogout=async()=>{
+  const check = await handleDelete();
+  if (check) {
+    navigate("/");
+  }
+}
   return (
     <>
       {/* Sidebar */}
@@ -51,13 +58,22 @@ const Dashboard = () => {
           isActive={activeSidebar === "health"}
           onClick={() => toggleModal("health")}
         />
-        <SidebarButton icon={<FaSignOutAlt />} />
+        <SidebarButton
+          onClick={handleLogout}
+          icon={<FaSignOutAlt />}
+        />
       </div>
 
       {/* Modals */}
-      {activeModal === "health" && <HealthModal onClose={() => toggleModal(null)} />}
-      {activeModal === "toxic" && <ToxicModal onClose={() => toggleModal(null)} />}
-      {activeModal === "food" && <FoodModal onClose={() => toggleModal(null)} />}
+      {activeModal === "health" && (
+        <HealthModal onClose={() => toggleModal(null)} />
+      )}
+      {activeModal === "toxic" && (
+        <ToxicModal onClose={() => toggleModal(null)} />
+      )}
+      {activeModal === "food" && (
+        <FoodModal onClose={() => toggleModal(null)} />
+      )}
 
       {/* Tab Buttons */}
       <div className="flex fixed left-20 py-2 justify-center mt-4 bg-transparent">
@@ -76,19 +92,23 @@ const Dashboard = () => {
       </div>
 
       {/* Plant Section */}
-      <div className={`tab-content ${activeTab === "healthy" ? "healthy" : "unhealthy"}`}>
+      <div
+        className={`tab-content ${
+          activeTab === "healthy" ? "healthy" : "unhealthy"
+        }`}
+      >
         <div className="flex justify-center gap-9 items-end p-9 h-screen">
           {activeTab === "healthy"
             ? healthyPlants.map((img, index) => (
-              <div key={index} className="plant">
-                <img src={img} alt={`Healthy Plant ${index + 1}`} />
-              </div>
-            ))
+                <div key={index} className="plant">
+                  <img src={img} alt={`Healthy Plant ${index + 1}`} />
+                </div>
+              ))
             : unhealthyPlants.map((img, index) => (
-              <div key={index} className="plant">
-                <img src={img} alt={`Unhealthy Plant ${index + 1}`} />
-              </div>
-            ))}
+                <div key={index} className="plant">
+                  <img src={img} alt={`Unhealthy Plant ${index + 1}`} />
+                </div>
+              ))}
         </div>
       </div>
     </>
@@ -98,8 +118,11 @@ const Dashboard = () => {
 // Sidebar Button Component
 const SidebarButton = ({ icon, isActive, onClick }) => (
   <button
-    className={`flex curs items-center justify-center w-12 h-12 rounded-full shadow-md transition-all ${isActive ? "bg-green-500 text-white" : "bg-white bg-opacity-30 hover:bg-opacity-50"
-      }`}
+    className={`flex curs items-center justify-center w-12 h-12 rounded-full shadow-md transition-all ${
+      isActive
+        ? "bg-green-500 text-white"
+        : "bg-white bg-opacity-30 hover:bg-opacity-50"
+    }`}
     onClick={onClick}
   >
     {icon}
