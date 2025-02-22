@@ -14,14 +14,14 @@ const useDelete = (url) => {
       const response = await axios.delete(url);
       console.log(response.data); 
       setResponseMessage(response.data);
-      setHealth([])
-      setRegular([])
-      setOccasional([])
-      setToxic([])
-      setOccasional([])
-      setToxic([]) 
-       setGoodPlants([])
-       setBadPlants([])
+      // setHealth([])
+      // setRegular([])
+      // setOccasional([])
+      // setToxic([])
+      // setOccasional([])
+      // setToxic([]) 
+      //  setGoodPlants([])
+      //  setBadPlants([])
       return true;
     } catch (error) {
       console.log(error);
