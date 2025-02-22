@@ -47,9 +47,16 @@ import cactus5 from "../../assets/bad plants/Final Cactus (5).png";
 import cactus6 from "../../assets/bad plants/Final Cactus 6.png";
 
 //dead plants
-import Withered from "../../assets/goodPlant/Withered Flower.png";
-import Withering from "../../assets/goodPlant/Withering Flower.png";
-import FinalWithering from "../../assets/goodPlant/Final Withered Flower.png";
+import RedWithering from "../../assets/goodPlant/red_Withering_Flower.png";
+import RedWithered from "../../assets/goodPlant/red_Withered_Flower.png";
+import YellowWithering from "../../assets/goodPlant/yellow_Withering_Flower.png";
+import YellowWithered from "../../assets/goodPlant/yellow_Withered_Flower.png";
+import pinkWithering from "../../assets/goodPlant/pink_Withering_Flower.png";
+import pinkWithered from "../../assets/goodPlant/pink_Withered_Flower.png";
+import purpleWithering from "../../assets/goodPlant/purple_Withering_Flower.png";
+import purpleWithered from "../../assets/goodPlant/purple_Withered_Flower.png";
+import orangeWithering from "../../assets/goodPlant/orange_Withering.png";
+import orangeWithered from "../../assets/goodPlant/orange_Withered_Flowe.png";
 import FinalWitheringDEAD from "../../assets/goodPlant/Final_Withered_Flower.png";
 import "./dash.css";
 import useGet from "../../hooks/useGet";
@@ -74,8 +81,7 @@ const Dashboard = () => {
   const navigate = useNavigate();
 
   const { handleDelete } = useDelete("/auth/logout");
-  const { handleData } = usePlant("/garden");
-  const healthyPlants = [root, stem, shoot, one, one, two];
+ 
   const healthy = {
     G1: {
       1: root,
@@ -124,7 +130,7 @@ const Dashboard = () => {
       6: stem,
       7: redBud,
       8: redBud,
-      8: red,
+    9: red,
       10: red,
     },
     G5: {
@@ -155,47 +161,47 @@ const Dashboard = () => {
   const healthAndAge = {
     G1: {
       1: FinalWitheringDEAD,
-      2: FinalWithering,
-      3: Withered,
-      4: Withering,
-      5: Withering,
+      2: RedWithered,
+      3: RedWithered,
+      4: RedWithering,
+      5: RedWithering,
      
     },
 
     G2: {
       1: FinalWitheringDEAD,
-      2: FinalWithering,
-      3: Withered,
-      4: Withering,
-      5: Withering,
+      2: YellowWithered,
+      3: YellowWithered,
+      4: YellowWithering,
+      5: YellowWithering,
     },
     G3: {
       1: FinalWitheringDEAD,
-      2: FinalWithering,
-      3: Withered,
-      4: Withering,
-      5: Withering,
+      2: pinkWithered,
+      3: pinkWithered,
+      4: pinkWithering,
+      5: pinkWithering,
     },
     G4: {
       1: FinalWitheringDEAD,
-      2: FinalWithering,
-      3: Withered,
-      4: Withering,
-      5: Withering,
+      2: orangeWithered,
+      3: orangeWithered,
+      4: orangeWithering,
+      5: orangeWithering,
     },
     G5: {
       1: FinalWitheringDEAD,
-      2: FinalWithering,
-      3: Withered,
-      4: Withering,
-      5: Withering,
+      2: purpleWithered,
+      3: purpleWithered,
+      4: purpleWithering,
+      5: purpleWithering,
     },
     G6: {
       1: FinalWitheringDEAD,
-      2: FinalWithering,
-      3: Withered,
-      4: Withering,
-      5: Withering,
+      2: YellowWithered,
+      3: YellowWithered,
+      4: YellowWithering,
+      5: YellowWithering,
     },
   };
   const unHealthy = {
@@ -413,7 +419,7 @@ const Dashboard = () => {
             : goodPlants.map((plantData, index) => (
                 <div key={index} className="plant">
                   <img
-                    src={checkValue(plantData.plant, plantData.age)}
+                    src={checkValue(plantData.plant,plantData.health, plantData.age)}
                     alt={`Healthy Plant ${index + 1}`}
                   />
                   <h1>{plantData.prompt}</h1>
