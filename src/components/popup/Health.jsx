@@ -21,11 +21,17 @@ const HealthModal = ({ onClose }) => {
     margin: "0 auto",
     borderColor: "red",
   };
+  const [loading, setLoading] = useState(false);
   const handleSubmit = async (e) => {
-    e.preventDefault()
-    await update();
-    onClose();
-  }
+    e.preventDefault();
+    setLoading(true);
+    try {
+      await update();
+      onClose();
+    } finally {
+      setLoading(false);
+    }
+  };
   const { update: saveOnly } = usePut('/garden/update', {
     'healthPrompt': ['Same']
   });
@@ -34,9 +40,14 @@ const HealthModal = ({ onClose }) => {
 
   const handleSaveasPerious = async (e) => {
     e.preventDefault()
+    setLoading(true);
+
     await saveOnly();
-    if (!isLoading) {
+    try {
+      await saveOnly();
       onClose();
+    } finally {
+      setLoading(false);
     }
   }
 
@@ -70,9 +81,14 @@ const HealthModal = ({ onClose }) => {
             ))}
           </div>
           <div className="flex p-2 gap-2 justify-end">
-            <button className="bg-blue-800  cursor-pointer text-white px-4 py-2 rounded-md" onClick={handleSubmit}>
-              Update
+            <button
+              className="bg-blue-800 text-white px-4 py-2 rounded-md flex items-center"
+              onClick={handleSubmit}
+              disabled={loading}
+            >
+              {loading ? "Updating..." : "Update"}
             </button>
+
             <button className="bg-blue-800 cursor-pointer text-white px-4 py-2 rounded-md" onClick={handleSaveasPerious}>
               Save as Previous
             </button>
@@ -85,7 +101,7 @@ const HealthModal = ({ onClose }) => {
 
     </div><ClockLoader
         color={color}
-        loading={isLoading}
+        loading={loading}
         cssOverride={override}
         size={150}
         aria-label="Loading Spinner"

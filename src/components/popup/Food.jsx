@@ -48,7 +48,7 @@ const FoodModal = ({ onClose }) => {
   };
 
   const [selectedFoods, setSelectedFoods] = useState([]);
-  const { isLoading } = useContext(AppContext);
+  const [loading, setLoading] = useState(false);
 
   const { update } = usePut('/garden/update', {
     'foodPrompt': selectedFoods
@@ -56,12 +56,15 @@ const FoodModal = ({ onClose }) => {
   let [color, setColor] = useState("#ffffff");
 
   const handleSubmit = async (e) => {
-    e.preventDefault()
-    await update();
-    if (!isLoading) {
+    e.preventDefault();
+    setLoading(true);
+    try {
+      await update();
       onClose();
+    } finally {
+      setLoading(false);
     }
-  }
+  };
   const toggleSelection = (food) => {
     setSelectedFoods((prevSelected) =>
       prevSelected.includes(food)
@@ -98,9 +101,9 @@ const FoodModal = ({ onClose }) => {
               <button
                 className="bg-blue-800 text-white px-4 py-2 rounded-md flex items-center"
                 onClick={handleSubmit}
-                disabled={isLoading}
+                disabled={loading}
               >
-                {isLoading ? "Updating..." : "Update"}
+                {loading ? "Updating..." : "Update"}
               </button>
 
               <button className="bg-red-800 cursor-pointer text-white px-4 py-2 rounded-md" onClick={onClose}>
@@ -112,7 +115,7 @@ const FoodModal = ({ onClose }) => {
       </div>
       <ClockLoader
         color={color}
-        loading={isLoading}
+        loading={loading}
         cssOverride={override}
         size={150}
         aria-label="Loading Spinner"
