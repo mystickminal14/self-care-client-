@@ -1,11 +1,11 @@
 import React, { useContext, useState } from "react";
 import {
   FaAppleAlt,
-  FaSkullCrossbones,
   FaHeart,
   FaSignOutAlt,
   FaGuilded,
 } from "react-icons/fa";
+import { GiHealthPotion } from "react-icons/gi";
 import HealthModal from "../../components/popup/Health";
 import FoodModal from "../../components/popup/Food";
 import ToxicModal from "../../components/popup/Toxic";
@@ -350,7 +350,7 @@ const Dashboard = () => {
           data-tooltip-place="right"
         >
           <SidebarButton
-            icon={<FaSkullCrossbones />}
+            icon={<GiHealthPotion />}
             isActive={activeSidebar === "toxic"}
             onClick={() => toggleModal("toxic")}
           />
@@ -441,7 +441,7 @@ const Dashboard = () => {
 
                     {/* Icon with hover trigger */}
                     <div className="absolute top-4 left-4 cursor-pointer">
-                      {plantData.prompt === 'Health' ? <FaHeart /> : plantData.prompt === 'Toxic' ? <FaSkullCrossbones /> : <FaAppleAlt />}
+                      {plantData.prompt === 'Health' ? <FaHeart /> : plantData.prompt === 'Toxic' ? <GiHealthPotion /> : <FaAppleAlt />}
                     </div>
 
                     {/* Hidden div that appears on hover */}
@@ -494,7 +494,7 @@ const Dashboard = () => {
 
                       {/* Icon with hover trigger */}
                       <div className="absolute top-4 left-4 cursor-pointer">
-                        {plantData.prompt === 'Health' ? <FaHeart /> : plantData.prompt === 'Toxic' ? <FaSkullCrossbones /> : <FaAppleAlt />}
+                        {plantData.prompt === 'Health' ? <FaHeart /> : plantData.prompt === 'Toxic' ? <GiHealthPotion /> : <FaAppleAlt />}
                       </div>
 
                       {/* Hidden div that appears on hover */}
