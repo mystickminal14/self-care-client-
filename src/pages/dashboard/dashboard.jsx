@@ -509,7 +509,7 @@ console.log(activeTab)
             );}
               )
             : goodPlants.map((plantData, index) => {
-                const healthPercentage = (plantData.health / 10) * 100; // Convert health to percentage
+                const healthPercentage = (plantData.health / 10) * 100;
                 return (
                   <div key={index} className="plant relative">
                     <img
